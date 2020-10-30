@@ -42,10 +42,6 @@ clean:
 	@echo " $(RM) -r $(BUILDDIR) $(BINDIR)"; $(RM) -r $(BUILDDIR) $(BINDIR)
 
 # Tests
-test:
-	$(CC) test/heuristic/main.cpp -o bin/tester $(LIB)
-
-	# Tests
 heuristic: $(TARGET_HT)
 
 # Spikes
