@@ -1,6 +1,7 @@
-#include <iostream>
+#include "../include/GameHandler.hpp"
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
+    GameHandler *gameHandler = new GameHandler();
+    gameHandler->run();
     return 0;
 }
