@@ -51,3 +51,93 @@ Player Game::getPlayer(int8_t playerNumber){
     // fallback
     return Player();
 }
+
+bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
+    int lineSize = 4;
+    // vedrticalCheck 
+    for (int y = 0; y < this->SizeY-3 ; y++ ){
+        for (int x = 0; x < this->SizeX; x++){
+            bool brk = false;
+            int emptyCounter = 0;
+            for(int s = 0; s < lineSize && !brk; s++) {
+               if(grid.getStone(x, y + s) != player.Id) {
+                   // check if field is free
+                   if(grid.getStone(x, y + s) == 0 && emptyCounter < (lineSize-numberOfStones)) {
+                       emptyCounter++;
+                   } else {
+                       brk = true;
+                   }
+               }
+
+            }
+            if(brk == false) {
+                return true;
+            }          
+        }
+    }
+
+    // horizontalCheck
+    for (int x = 0; x < this->SizeX-3; x++ ){
+        for (int y = 0; y < this->SizeY; y++){
+            bool brk = false;
+            int emptyCounter = 0;
+            for(int s = 0; s < lineSize && !brk; s++) {
+               if(grid.getStone(x + s, y) != player.Id) {
+                   // check if field is free
+                   if(grid.getStone(x + s, y) == 0 && emptyCounter < (lineSize-numberOfStones)) {
+                       emptyCounter++;
+                   } else {
+                       brk = true;
+                   }
+               }
+
+            }
+            if(!brk) {
+                return true;
+            }     
+        }
+    }
+    // ascendingDiagonalCheck 
+    for (int x=3; x < this->SizeX; x++){
+        for (int y=0; y < this->SizeY-3; y++){
+            bool brk = false;
+            int emptyCounter = 0;
+            for(int s = 0; s < lineSize && !brk; s++) {
+               if(grid.getStone(x - s, y + s) != player.Id) {
+                   // check if field is free
+                   if(grid.getStone(x - s, y + s) == 0 && emptyCounter < (lineSize-numberOfStones)) {
+                       emptyCounter++;
+                   } else {
+                       brk = true;
+                   }
+               }
+
+            }
+            if(!brk) {
+                return true;
+            }     
+        }
+    }
+    // descendingDiagonalCheck
+    for (int x=3; x < this->SizeX; x++){
+        for (int y=3; y < this->SizeY; y++){
+            bool brk = false;
+            int emptyCounter = 0;
+            for(int s = 0; s < lineSize && !brk; s++) {
+               if(grid.getStone(x - s, y - s) != player.Id) {
+                   // check if field is free
+                   if(grid.getStone(x - s, y - s) == 0 && emptyCounter < (lineSize-numberOfStones)) {
+                       emptyCounter++;
+                   } else {
+                       brk = true;
+                   }
+               }
+
+            }
+            if(!brk) {
+                return true;
+            }     
+        }
+    }
+    return false;
+}
