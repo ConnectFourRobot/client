@@ -22,10 +22,10 @@ class Game {
          * Put a stone in a column
          *
          * @param Player Owner of the stone
-         * @param x Column
+         * @param column Column in wich the stone gets thrown
          * @param Grid The corresponding grid
         */
-        void setStone(Player player, int x, Grid& grid);
+        void setStone(Player player, int column, Grid& grid);
 
         /**
          * Get all moves that are possible

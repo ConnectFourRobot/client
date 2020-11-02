@@ -18,7 +18,7 @@ Game::Game(int sizeX, int sizeY, int numberOfPlayers) {
     this->Players = players;
 }
 
-void Game::setStone(Player player, int x, Grid& grid){
+void Game::setStone(Player player, int column, Grid& grid){
     int y = 0;
     for(int i = 0; i < this->SizeY; i++){
         if(grid.getStone(x, y) == 0){
@@ -54,7 +54,7 @@ Player Game::getPlayer(int8_t playerNumber){
 
 bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
     int lineSize = 4;
-    // vedrticalCheck 
+    // verticalCheck 
     for (int y = 0; y < this->SizeY-3 ; y++ ){
         for (int x = 0; x < this->SizeX; x++){
             bool brk = false;
