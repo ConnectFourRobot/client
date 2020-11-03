@@ -1,7 +1,13 @@
 #include "../include/GameHandler.hpp"
 
-GameHandler::GameHandler() {
+GameHandler::GameHandler(std::string host, unsigned short port) {
     // ToDo: connect to broker
+    if(DataHandlingService::getInstance().start(host, port) < 0){
+        //cant connect to the server
+        // ToDo: Log-Tool
+        std::cout << "Can not connect to broker" << std::endl;
+        exit(0);
+    }
     std::cout << "Init vgr-client" << std::endl;
 }
 
@@ -23,6 +29,4 @@ void GameHandler::run() {
     this->_game.setStone(this->_game.getPlayer(2), 4, this->_game.CurrentMap);
     // print new grid
     std::cout << this->_game.CurrentMap << std::endl;
-
-
 }
