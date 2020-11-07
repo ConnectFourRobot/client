@@ -1,4 +1,4 @@
-#include "../include/util/InputParser.hpp"
+#include "../../include/util/InputParser.hpp"
 
 InputParser::InputParser(int &argc, char **argv) {
     for (int i = 1; i < argc; ++i){
