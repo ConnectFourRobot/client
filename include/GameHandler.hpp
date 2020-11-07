@@ -1,7 +1,9 @@
 #ifndef GAMEHANDLER_H
 #define GAMEHANDLER_H
 
-#include "iostream"
+#include <string>
+
+#include <iostream>
 #include "game/Game.hpp"
 
 class GameHandler{

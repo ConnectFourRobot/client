@@ -9,14 +9,14 @@
 
 class Game {
     public: 
-        int SizeX;
-        int SizeY;
-        Grid CurrentMap;
-        std::vector<Player> Players;
+        int sizeX;
+        int sizeY;
+        Grid currentMap;
+        std::vector<Player> players;
 
         Game(int sizeX, int sizeY, int numberOfPlayers);
 
-        Game() : SizeX(0), SizeY(0) {};
+        Game() : sizeX(0), sizeY(0) {};
 
         /**
          * Put a stone in a column

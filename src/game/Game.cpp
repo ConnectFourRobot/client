@@ -12,27 +12,27 @@ Game::Game(int sizeX, int sizeY, int numberOfPlayers) {
         players.push_back(p);
     }
 
-    this->SizeX = sizeX;
-    this->SizeY = sizeY;
-    this->CurrentMap = grid;
-    this->Players = players;
+    this->sizeX = sizeX;
+    this->sizeY = sizeY;
+    this->currentMap = grid;
+    this->players = players;
 }
 
 void Game::setStone(Player player, int column, Grid& grid){
     int row = 0;
-    for(int i = 0; i < this->SizeY; i++){
+    for(int i = 0; i < this->sizeY; i++){
         if(grid.getStone(column, row) == 0){
             row++;
         }else{
             break;
         }
     }
-    grid.getStone(column, row - 1) = player.Id;
+    grid.getStone(column, row - 1) = player.id;
 }
 
 std::vector<PossibleMove> Game::getPossibleMoves(Player player, Grid grid){
     std::vector<PossibleMove> moves;
-    for(int x = 0; x < this->SizeX; x++){
+    for(int x = 0; x < this->sizeX; x++){
         if(grid.getStone(x, 0) == 0){
             this->setStone(player, x, grid);
             moves.push_back(PossibleMove(x, grid));
@@ -42,8 +42,8 @@ std::vector<PossibleMove> Game::getPossibleMoves(Player player, Grid grid){
 }
 
 Player Game::getPlayer(int8_t playerNumber){
-    for (Player player : this->Players) {
-        if(player.Id == playerNumber) {
+    for (Player player : this->players) {
+        if(player.id == playerNumber) {
             return player;
         }
     }
@@ -54,12 +54,12 @@ Player Game::getPlayer(int8_t playerNumber){
 bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
     int lineSize = 4;
     // verticalCheck 
-    for (int y = 0; y < this->SizeY-3 ; y++ ){
-        for (int x = 0; x < this->SizeX; x++){
+    for (int y = 0; y < this->sizeY-3 ; y++ ){
+        for (int x = 0; x < this->sizeX; x++){
             bool brk = false;
             int emptyCounter = 0;
             for(int s = 0; s < lineSize && !brk; s++) {
-               if(grid.getStone(x, y + s) != player.Id) {
+               if(grid.getStone(x, y + s) != player.id) {
                    // check if field is free
                    if(grid.getStone(x, y + s) == 0 && emptyCounter < (lineSize-numberOfStones)) {
                        emptyCounter++;
@@ -76,12 +76,12 @@ bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
     }
 
     // horizontalCheck
-    for (int x = 0; x < this->SizeX-3; x++ ){
-        for (int y = 0; y < this->SizeY; y++){
+    for (int x = 0; x < this->sizeX-3; x++ ){
+        for (int y = 0; y < this->sizeY; y++){
             bool brk = false;
             int emptyCounter = 0;
             for(int s = 0; s < lineSize && !brk; s++) {
-               if(grid.getStone(x + s, y) != player.Id) {
+               if(grid.getStone(x + s, y) != player.id) {
                    // check if field is free
                    if(grid.getStone(x + s, y) == 0 && emptyCounter < (lineSize-numberOfStones)) {
                        emptyCounter++;
@@ -97,12 +97,12 @@ bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
         }
     }
     // ascendingDiagonalCheck 
-    for (int x=3; x < this->SizeX; x++){
-        for (int y=0; y < this->SizeY-3; y++){
+    for (int x=3; x < this->sizeX; x++){
+        for (int y=0; y < this->sizeY-3; y++){
             bool brk = false;
             int emptyCounter = 0;
             for(int s = 0; s < lineSize && !brk; s++) {
-               if(grid.getStone(x - s, y + s) != player.Id) {
+               if(grid.getStone(x - s, y + s) != player.id) {
                    // check if field is free
                    if(grid.getStone(x - s, y + s) == 0 && emptyCounter < (lineSize-numberOfStones)) {
                        emptyCounter++;
@@ -118,12 +118,12 @@ bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
         }
     }
     // descendingDiagonalCheck
-    for (int x=3; x < this->SizeX; x++){
-        for (int y=3; y < this->SizeY; y++){
+    for (int x=3; x < this->sizeX; x++){
+        for (int y=3; y < this->sizeY; y++){
             bool brk = false;
             int emptyCounter = 0;
             for(int s = 0; s < lineSize && !brk; s++) {
-               if(grid.getStone(x - s, y - s) != player.Id) {
+               if(grid.getStone(x - s, y - s) != player.id) {
                    // check if field is free
                    if(grid.getStone(x - s, y - s) == 0 && emptyCounter < (lineSize-numberOfStones)) {
                        emptyCounter++;
