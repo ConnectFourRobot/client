@@ -5,7 +5,6 @@ unsigned int NetworkMessage::getPayloadSize(){
 }
 
 std::string NetworkMessage::getNetworkMessage(){
-    int stringSize = ServerNetworkMessage::typeSize + ServerNetworkMessage::sizeSize + this->_size;
     char cp[NetworkMessage::typeSize + NetworkMessage::sizeSize];
 
     //type
