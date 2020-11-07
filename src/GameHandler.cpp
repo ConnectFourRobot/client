@@ -19,14 +19,14 @@ void GameHandler::run() {
     // init Game
     this->_game = Game(7, 6, 2);
     // print empty grid
-    std::cout << this->_game.CurrentMap << std::endl;
+    std::cout << this->_game.currentMap << std::endl;
     // throw stone
-    this->_game.setStone(this->_game.getPlayer(this->_playerNumber), 3, this->_game.CurrentMap);
+    this->_game.setStone(this->_game.getPlayer(this->_playerNumber), 3, this->_game.currentMap);
     // print new grid
-    std::cout << this->_game.CurrentMap << std::endl;
+    std::cout << this->_game.currentMap << std::endl;
 
     // throw opponent stone
-    this->_game.setStone(this->_game.getPlayer(2), 4, this->_game.CurrentMap);
+    this->_game.setStone(this->_game.getPlayer(2), 4, this->_game.currentMap);
     // print new grid
-    std::cout << this->_game.CurrentMap << std::endl;
+    std::cout << this->_game.currentMap << std::endl;
 }
