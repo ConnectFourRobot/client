@@ -1,35 +1,36 @@
 #include "../../include/network/NetworkClient.hpp"
+#ifdef __linux__
 
 int NetworkClient::connect(){
-    if ((_sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
-    { 
+    if ((_sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    {
         // ToDo: Log-Tool
         std::cout << "Socket creation error" << std::endl;
-        exit(0); 
-    } 
-   
-    memset(&_server, '0', sizeof(_server)); 
-   
-    _server.sin_family = AF_INET; 
-    _server.sin_port = htons(_port); 
-       
-    // Convert IPv4 and IPv6 addresses from text to binary form 
-    if(inet_pton(AF_INET, _address.c_str(), &_server.sin_addr)<=0)  
-    { 
-        // ToDo: Log-Tool
-        std::cout << "Invalid address" << std::endl;
-        exit(0); 
-    } 
-   
-    //try to connect
-    if (::connect(_sock, (struct sockaddr *)&_server, sizeof(_server)) < 0) 
-    { 
-        // ToDo: Log-Tool
-        std::cout << "connection failed" << std::endl;
-        return -1; 
+        exit(0);
     }
 
-    return 0; 
+    memset(&_server, '0', sizeof(_server));
+
+    _server.sin_family = AF_INET;
+    _server.sin_port = htons(_port);
+
+    // Convert IPv4 and IPv6 addresses from text to binary form
+    if(inet_pton(AF_INET, _address.c_str(), &_server.sin_addr)<=0)
+    {
+        // ToDo: Log-Tool
+        std::cout << "Invalid address" << std::endl;
+        exit(0);
+    }
+
+    //try to connect
+    if (::connect(_sock, (struct sockaddr *)&_server, sizeof(_server)) < 0)
+    {
+        // ToDo: Log-Tool
+        std::cout << "connection failed" << std::endl;
+        return -1;
+    }
+
+    return 0;
 }
 
 std::string NetworkClient::read(int size){
@@ -56,3 +57,5 @@ void NetworkClient::send(std::string message){
 NetworkClient::~NetworkClient(){
     _sock = 0;
 }
+
+#endif
