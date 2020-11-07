@@ -30,7 +30,7 @@ class NetworkMessage{
          * Get the whole network message
          * Including the type and the size
          *
-         * @return network message 
+         * @return network message
         */
         std::string getNetworkMessage();
 
@@ -75,9 +75,9 @@ class ServerNetworkMessage : public NetworkMessage{
             int8_t playerNumber;
         };
     public:
-        MoveStruct Move;
-        GameConfigStruct GameConfig;
-        EndGameStruct EndGame;
+        MoveStruct move;
+        GameConfigStruct gameConfig;
+        EndGameStruct endGame;
         ServerNetworkMessage(NetworkMessageType type, unsigned int size, std::string serverMessage);
 };
 #endif

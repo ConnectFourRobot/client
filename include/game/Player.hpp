@@ -4,9 +4,9 @@ class Player{
     private:
 
     public:
-        uint8_t Id;
+        uint8_t id;
 
-        Player(uint8_t id) : Id(id){};
-        Player() : Id(1){};
+        Player(uint8_t id) : id(id){};
+        Player() : id(1){};
 };
 #endif

@@ -8,15 +8,15 @@
 #include "PossibleMove.hpp"
 
 class Game {
-    public: 
-        int SizeX;
-        int SizeY;
-        Grid CurrentMap;
-        std::vector<Player> Players;
+    public:
+        int sizeX;
+        int sizeY;
+        Grid currentMap;
+        std::vector<Player> players;
 
         Game(int sizeX, int sizeY, int numberOfPlayers);
 
-        Game() : SizeX(0), SizeY(0) {};
+        Game() : sizeX(0), sizeY(0) {};
 
         /**
          * Put a stone in a column
@@ -30,8 +30,8 @@ class Game {
         /**
          * Get all moves that are possible
          *
-         * @param player The Player for wich this should be calculated 
-         * @param grid Grid on wich this should be calculated 
+         * @param player The Player for wich this should be calculated
+         * @param grid Grid on wich this should be calculated
          * @return possible moves
         */
         std::vector<PossibleMove> getPossibleMoves(Player player, Grid grid);

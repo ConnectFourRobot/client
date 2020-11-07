@@ -5,11 +5,11 @@
 
 class PossibleMove{
     public:
-        PossibleMove(int move, Grid grid) : 
-            Move(move), AfterGrid(grid){};
+        PossibleMove(int move, Grid grid) :
+            move(move), afterGrid(grid){};
         PossibleMove() {};
-        int Score;
-        int Move = 0;
-        Grid AfterGrid;
+        int score;
+        int move = 0;
+        Grid afterGrid;
 };
 #endif

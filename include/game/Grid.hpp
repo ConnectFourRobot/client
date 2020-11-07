@@ -14,14 +14,14 @@ class Grid {
          * 0 0 0 0 0 0 0
          * 0 1 1 1 1 2 0
          * 0 2 2 1 2 2 1
-         * 
+         *
          * inner vector: lines
          * outer vector: columns
         */
-        std::vector<std::vector<uint8_t>> MapArray;
+        std::vector<std::vector<uint8_t>> mapArray;
 
         Grid(){};
-        Grid(std::vector<std::vector<uint8_t>> mapArray) : MapArray(mapArray) {};
+        Grid(std::vector<std::vector<uint8_t>> mapArray) : mapArray(mapArray) {};
 
         /**
          * Get the value on a coordinate
@@ -31,14 +31,14 @@ class Grid {
          * @return value of the coordinates
         */
         inline uint8_t& getStone(int x, int y) {
-            return MapArray[y][x];
+            return mapArray[y][x];
         }
 
         /**
          * Prints the mapArray
         */
         friend std::ostream& operator << (std::ostream &out, const Grid &g){
-            for(std::vector<uint8_t> iv : g.MapArray){
+            for(std::vector<uint8_t> iv : g.mapArray){
                 for(uint8_t i : iv){
                     out << (int)i << " ";
                 }
