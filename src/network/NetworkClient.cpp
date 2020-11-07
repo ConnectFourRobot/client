@@ -25,7 +25,7 @@ int NetworkClient::connect(){
     if (::connect(_sock, (struct sockaddr *)&_server, sizeof(_server)) < 0) 
     { 
         // ToDo: Log-Tool
-        std::cout << "connection failed" << std::endl;
+        std::cout << "Connection failed" << std::endl;
         return -1; 
     }
 
