@@ -2,8 +2,7 @@
 
 Game::Game(int sizeX, int sizeY, int numberOfPlayers) {
     // init grid
-    std::vector<std::vector<uint8_t>> mapArray(sizeY, std::vector<uint8_t>(sizeX, 0));
-    Grid grid(mapArray);
+    Grid grid(sizeX, sizeY);
     
     // init players
     std::vector<Player> players;

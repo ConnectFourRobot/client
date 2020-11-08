@@ -5,7 +5,7 @@
 #include <iostream>
 
 class Grid {
-    public:
+    private:
         /**
          * Array of stones
          * 0 0 0 0 0 0 0
@@ -18,10 +18,13 @@ class Grid {
          * inner vector: lines
          * outer vector: columns
         */
-        std::vector<std::vector<uint8_t>> MapArray;
+        std::vector<std::vector<uint8_t>> _mapArray;
 
+    public:
         Grid(){};
-        Grid(std::vector<std::vector<uint8_t>> mapArray) : MapArray(mapArray) {};
+        Grid(int sizeX, int sizeY) {
+            this->_mapArray = std::vector<std::vector<uint8_t>>(sizeY, std::vector<uint8_t>(sizeX, 0));
+        }
 
         /**
          * Get the value on a coordinate
@@ -31,14 +34,14 @@ class Grid {
          * @return value of the coordinates
         */
         inline uint8_t& getStone(int x, int y) {
-            return MapArray[y][x];
+            return _mapArray[y][x];
         }
 
         /**
          * Prints the mapArray
         */
         friend std::ostream& operator << (std::ostream &out, const Grid &g){
-            for(std::vector<uint8_t> iv : g.MapArray){
+            for(std::vector<uint8_t> iv : g._mapArray){
                 for(uint8_t i : iv){
                     out << (int)i << " ";
                 }
