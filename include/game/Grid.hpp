@@ -21,9 +21,11 @@ class Grid {
         std::vector<std::vector<uint8_t>> _mapArray;
 
     public:
+        static const uint8_t emptyField = 0;
+
         Grid(){};
         Grid(int sizeX, int sizeY) {
-            this->_mapArray = std::vector<std::vector<uint8_t>>(sizeY, std::vector<uint8_t>(sizeX, 0));
+            this->_mapArray = std::vector<std::vector<uint8_t>>(sizeY, std::vector<uint8_t>(sizeX, Grid::emptyField));
         }
 
         /**
