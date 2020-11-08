@@ -53,14 +53,14 @@ ServerNetworkMessage::ServerNetworkMessage(NetworkMessageType type, unsigned int
     switch (type)
     {
         case NetworkMessageType::Configuration:
-            this->GameConfig.playerNumber = serverMessage.at(0);
+            this->gameConfig.playerNumber = serverMessage.at(0);
             break;
         case NetworkMessageType::Move:
-            this->Move.x = serverMessage.at(0);
-            this->Move.playerNumber = serverMessage.at(1);
+            this->move.x = serverMessage.at(0);
+            this->move.playerNumber = serverMessage.at(1);
             break;
         case NetworkMessageType::EndGame:
-            this->EndGame.playerNumber = serverMessage.at(0);
+            this->endGame.playerNumber = serverMessage.at(0);
             break;
         default:
             break;
