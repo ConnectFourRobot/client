@@ -6,7 +6,6 @@ unsigned int NetworkMessage::getPayloadSize(){
 
 std::string NetworkMessage::getNetworkMessage(){
     //TODO stringSize is unused, probably missing terminating zero, maybe change to char cp[1000] {0};
-    int stringSize = ServerNetworkMessage::typeSize + ServerNetworkMessage::sizeSize + this->_size;
     char cp[NetworkMessage::typeSize + NetworkMessage::sizeSize];
 
     //type
