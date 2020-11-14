@@ -35,6 +35,13 @@ void GameHandler::run() {
     // print new grid
     std::cout << this->_game.currentMap << std::endl;
 
+    //find all moves
+    auto moves = PossibleMove::calcPossibleMoves(this->_game.currentMap, this->_game, 2);
+    this->_game.currentMap = moves->next->afterGrid;
+
+    // print new grid
+    std::cout << this->_game.currentMap << std::endl;
+
     std::cout << "Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
 
 }
