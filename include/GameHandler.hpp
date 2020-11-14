@@ -13,12 +13,15 @@ private:
     short _playerNumber;
     Game _game;
 public:
+    /** constructor */
     GameHandler(std::string host, unsigned short port);
+
+    /** destructor */
+    ~GameHandler();
 
     /**
      * starts the gamehandler
     */
     void run();
-    ~GameHandler();
 };
 #endif

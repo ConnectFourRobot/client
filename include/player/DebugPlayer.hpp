@@ -6,7 +6,10 @@
 class DebugPlayer : public Player
 {
 public:
+    /** constructor */
     DebugPlayer(): Player() {}
+
+    /** @inheritdoc */
     virtual int getMove(Game & game);
 };
 

@@ -6,7 +6,10 @@
 class RandomMovePlayer : public Player
 {
 public:
+    /** constructor */
     RandomMovePlayer();
+
+    /** @inheritdoc */
     virtual int getMove(Game & game);
 };
 

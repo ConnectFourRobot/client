@@ -8,6 +8,9 @@
 class Grid
 {
 public:
+    static const uint8_t EMPTY_FIELD = 0;
+
+public:
     /**
      * Array of stones
      * 0 0 0 0 0 0 0
@@ -22,9 +25,6 @@ public:
      * mapArray[line][column] = stone-owner
     */
     std::vector<std::vector<uint8_t>> mapArray;
-
-public:
-    static const uint8_t emptyField = 0;
 
     /**
     * @see GameState.hpp
@@ -79,6 +79,11 @@ public:
         return (this->stateOfGame & GAMESTATE_RUNNING_BIT) && !(this->stateOfGame & GAMESTATE_ERROR_BIT);
     }
 
+    /**
+    * Get the winner of a terminated game
+    *
+    * @return int playerId or -1 for a draw
+    */
     int getWinner(void);
 
     /**

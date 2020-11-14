@@ -16,20 +16,15 @@ public:
     int currentPlayerId;
     std::vector<Player *> players;
 
+    /**
+     * constructor
+    */
     Game(int sizeX, int sizeY);
 
-    void addPlayer(Player * player);
-
-    // Game() : sizeX(0), sizeY(0) {};
-
     /**
-     * Get all moves that are possible
-     *
-     * @param player The Player for wich this should be calculated
-     * @param grid Grid on wich this should be calculated
-     * @return possible moves
+     * Add given player to game
     */
-    //    std::vector<PossibleMove> getPossibleMoves(Player & player, Grid grid);
+    void addPlayer(Player * player);
 
     /**
      * Get player with playernumber
@@ -39,17 +34,18 @@ public:
     */
     Player & getPlayer(int8_t playerNumber);
 
+    /**
+     * Get the player whose turn it is
+     *
+     * @return player
+    */
     Player & getCurrentPlayer();
 
-    void putStone(int column);
     /**
-     * check if player has "numberOfStones" in a row
+     * The player whose turn it is throw a stone into given column
      *
-     * @param numberOfStones Number of stones the player has to have in a row to return true
-     * @param grid the corresponding grid
-     * @param player
-     * @return True if the player has numberOfStones in a row, false if not
+     * @param int column
     */
-//        bool checkLine(int numberOfStones, Grid& grid, Player & player);
+    void putStone(int column);
 };
 #endif

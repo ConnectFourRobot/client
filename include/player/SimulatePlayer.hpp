@@ -6,7 +6,11 @@
 class SimulatePlayer : public Player
 {
 public:
-    virtual int getMove(Game & game);
+    /** constructor */
+    SimulatePlayer();
+
+    /** @inheritdoc */
+     virtual int getMove(Game & game);
 };
 
 #endif //PLAYER_SIMULATEPLAYER_HPP
