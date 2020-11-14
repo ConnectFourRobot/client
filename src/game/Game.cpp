@@ -2,11 +2,11 @@
 
 Game::Game(int sizeX, int sizeY):
     //initializer
-    currentMap(sizeX, sizeY),
     sizeX(sizeX),
     sizeY(sizeY),
-    players(std::vector<Player *>(0)),
-    currentPlayerId(1)
+    currentMap(sizeX, sizeY),
+    currentPlayerId(1),
+    players(std::vector<Player *>(0))
 {
 }
 
@@ -30,7 +30,7 @@ void Game::putStone(int column)
 {
     this->currentMap.putStone(this->currentPlayerId, column);
     this->currentPlayerId++;
-    if (this->currentPlayerId > this->players.size())
+    if (this->currentPlayerId > static_cast<int>(this->players.size()))
     {
         this->currentPlayerId = 1;
     }

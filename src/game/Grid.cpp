@@ -21,8 +21,8 @@ inline uint8_t Grid::getStoneSafe(int x, int y)
     {
         return 255;
     }
-    register std::vector<uint8_t> & mapLine = this->mapArray[y];
-    if (x >= mapLine.size())
+    std::vector<uint8_t> & mapLine = this->mapArray[y];
+    if (x >= static_cast<int>(mapLine.size()))
     {
         return 255;
     }

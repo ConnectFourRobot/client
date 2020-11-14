@@ -2,7 +2,7 @@
 #include "../../include/game/Grid.hpp"
 #include "../../include/game/Game.hpp"
 
-PossibleMove::PossibleMove(const Grid & oldGrid, int column, int playerId) : afterGrid(oldGrid), moveColumn(column)
+PossibleMove::PossibleMove(const Grid & oldGrid, int column, int playerId) : moveColumn(column), afterGrid(oldGrid)
 {
     this->afterGrid.putStone(playerId, column);
 };
