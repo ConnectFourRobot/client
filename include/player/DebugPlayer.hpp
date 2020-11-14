@@ -3,7 +3,8 @@
 
 #include "Player.hpp"
 
-class DebugPlayer : public Player {
+class DebugPlayer : public Player
+{
 public:
     DebugPlayer(): Player() {}
     virtual int getMove(Game & game);

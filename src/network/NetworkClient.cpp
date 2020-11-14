@@ -1,7 +1,8 @@
 #include "../../include/network/NetworkClient.hpp"
 #ifdef __linux__
 
-int NetworkClient::connect(){
+int NetworkClient::connect()
+{
     if ((_sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         // ToDo: Log-Tool
@@ -33,28 +34,32 @@ int NetworkClient::connect(){
     return 0;
 }
 
-std::string NetworkClient::read(int size){
+std::string NetworkClient::read(int size)
+{
     //Receive a reply from the server
     char mp[size];
-	if(::recv(_sock, mp, size , 0) < 0)
-	{
+    if(::recv(_sock, mp, size, 0) < 0)
+    {
         // recv failed
         // ToDo: Log-Tool
         return "";
-	}
+    }
     std::string s = std::string(mp, size);
     // ToDo: Log the string via Log-Tool
     return s;
 }
 
-void NetworkClient::send(std::string message){
-    if(_sock){
+void NetworkClient::send(std::string message)
+{
+    if(_sock)
+    {
         ::send(_sock, message.c_str(), message.length(), 0);
         // ToDo: Log the message via Log-Tool
     }
 }
 
-NetworkClient::~NetworkClient(){
+NetworkClient::~NetworkClient()
+{
     _sock = 0;
 }
 

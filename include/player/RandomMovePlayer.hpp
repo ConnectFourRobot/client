@@ -3,7 +3,8 @@
 
 #include "Player.hpp"
 
-class RandomMovePlayer : public Player {
+class RandomMovePlayer : public Player
+{
 public:
     RandomMovePlayer();
     virtual int getMove(Game & game);

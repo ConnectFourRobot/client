@@ -23,8 +23,8 @@ public:
     */
     std::vector<std::vector<uint8_t>> mapArray;
 
-    public:
-        static const uint8_t emptyField = 0;
+public:
+    static const uint8_t emptyField = 0;
 
     /**
     * @see GameState.hpp

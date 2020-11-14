@@ -3,7 +3,8 @@
 
 #include "Player.hpp"
 
-class SimulatePlayer : public Player {
+class SimulatePlayer : public Player
+{
 public:
     virtual int getMove(Game & game);
 };

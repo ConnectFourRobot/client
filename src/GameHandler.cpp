@@ -47,9 +47,12 @@ void GameHandler::run()
 
     std::cout << std::endl << "Game ended. ";
     winner = this->_game.currentMap.getWinner();
-    if (winner < 0) {
+    if (winner < 0)
+    {
         std::cout << "It is a draw. ";
-    } else {
+    }
+    else
+    {
         std::cout << "Player #" << winner << " won. ";
     }
     std::cout << "Final grid: " << std::endl << this->_game.currentMap << std::endl;

@@ -1,16 +1,19 @@
 #include "../../include/network/DataHandlingService.hpp"
 
-int DataHandlingService::start(std::string host, unsigned short port){
+int DataHandlingService::start(std::string host, unsigned short port)
+{
     this->_networkClient = new NetworkClient(host, port);
     return this->_networkClient->connect();
 }
 
-void DataHandlingService::sendMessage(ClientNetworkMessage message){
+void DataHandlingService::sendMessage(ClientNetworkMessage message)
+{
     std::string networkMessage = message.getNetworkMessage();
     this->_networkClient->send(networkMessage);
 }
 
-ServerNetworkMessage DataHandlingService::receiveMessage(){
+ServerNetworkMessage DataHandlingService::receiveMessage()
+{
     //type
     std::string typeString = this->_networkClient->read(ServerNetworkMessage::typeSize);
 
@@ -27,6 +30,7 @@ ServerNetworkMessage DataHandlingService::receiveMessage(){
     return sm;
 }
 
-DataHandlingService::~DataHandlingService(){
+DataHandlingService::~DataHandlingService()
+{
     delete _networkClient;
 }

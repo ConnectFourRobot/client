@@ -34,10 +34,14 @@ bool Grid::isColumnNotFull(int x)
     return this->getStone(x, 0) == 0;
 }
 
-int Grid::getWinner(void) {
-    if (this->stateOfGame & GAMESTATE_WIN_BIT) {
+int Grid::getWinner(void)
+{
+    if (this->stateOfGame & GAMESTATE_WIN_BIT)
+    {
         return static_cast<int>(this->stateOfGame & GAMESTATE_PLAYERID_MASK);
-    } else {
+    }
+    else
+    {
         return -1;
     }
 }

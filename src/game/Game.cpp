@@ -47,7 +47,8 @@ void Game::putStone(int column)
 {
     this->currentMap.putStone(this->currentPlayerId, column);
     this->currentPlayerId++;
-    if (this->currentPlayerId > this->players.size()) {
+    if (this->currentPlayerId > this->players.size())
+    {
         this->currentPlayerId = 1;
     }
 }

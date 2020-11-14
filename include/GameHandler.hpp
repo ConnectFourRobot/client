@@ -7,17 +7,18 @@
 #include "game/Game.hpp"
 #include "network/DataHandlingService.hpp"
 
-class GameHandler{
-    private:
-        short _playerNumber;
-        Game _game;
-    public:
-        GameHandler(std::string host, unsigned short port);
-        
-        /**
-         * starts the gamehandler
-        */
-        void run();
-        ~GameHandler();
+class GameHandler
+{
+private:
+    short _playerNumber;
+    Game _game;
+public:
+    GameHandler(std::string host, unsigned short port);
+
+    /**
+     * starts the gamehandler
+    */
+    void run();
+    ~GameHandler();
 };
 #endif

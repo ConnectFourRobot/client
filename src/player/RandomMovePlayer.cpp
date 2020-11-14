@@ -5,11 +5,13 @@
 #include <cstdlib>
 #include <ctime>
 
-RandomMovePlayer::RandomMovePlayer(): Player() {
+RandomMovePlayer::RandomMovePlayer(): Player()
+{
     srand(time(NULL));
 }
 
-int RandomMovePlayer::getMove(Game & game) {
+int RandomMovePlayer::getMove(Game & game)
+{
     auto moves = PossibleMove::calcPossibleMoves(game.currentMap, game, this->getId());
     int countMoves = moves.size();
     int resultMoveIndex = rand() % countMoves;
