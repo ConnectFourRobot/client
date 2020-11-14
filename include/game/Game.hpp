@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Grid.hpp"
-#include "Player.hpp"
+#include "../player/Player.hpp"
 #include "PossibleMove.hpp"
 
 class Game {
@@ -12,9 +12,12 @@ class Game {
         const int sizeX;
         const int sizeY;
         Grid currentMap;
-        std::vector<Player> players;
+        int currentPlayerId;
+        std::vector<Player *> players;
 
-        Game(int sizeX, int sizeY, int numberOfPlayers);
+        Game(int sizeX, int sizeY);
+
+        void addPlayer(Player * player);
 
        // Game() : sizeX(0), sizeY(0) {};
 
@@ -25,7 +28,7 @@ class Game {
          * @param grid Grid on wich this should be calculated
          * @return possible moves
         */
-        std::vector<PossibleMove> getPossibleMoves(Player player, Grid grid);
+    //    std::vector<PossibleMove> getPossibleMoves(Player & player, Grid grid);
 
         /**
          * Get player with playernumber
@@ -33,8 +36,11 @@ class Game {
          * @param playerNumber Number of player that should be returned
          * @return player
         */
-        Player getPlayer(int8_t playerNumber);
+        Player & getPlayer(int8_t playerNumber);
 
+        Player & getCurrentPlayer();
+
+        void putStone(int column);
         /**
          * check if player has "numberOfStones" in a row
          *
@@ -43,6 +49,6 @@ class Game {
          * @param player
          * @return True if the player has numberOfStones in a row, false if not
         */
-        bool checkLine(int numberOfStones, Grid& grid, Player player);
+//        bool checkLine(int numberOfStones, Grid& grid, Player & player);
 };
 #endif

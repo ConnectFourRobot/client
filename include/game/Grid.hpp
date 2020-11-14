@@ -59,7 +59,7 @@ public:
      * @param int y Y Coordinate of the stone
      * @return uint8_t value of the coordinates
     */
-    inline uint8_t getSafe(int x, int y);
+    inline uint8_t getStoneSafe(int x, int y);
 
     /**
      * is there still a place for another stone in the column
@@ -75,6 +75,8 @@ public:
     {
         return (this->stateOfGame & GAMESTATE_RUNNING_BIT) && !(this->stateOfGame & GAMESTATE_ERROR_BIT);
     }
+
+    int getWinner(void);
 
     /**
     * Put a stone in a column

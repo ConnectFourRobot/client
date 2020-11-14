@@ -15,7 +15,7 @@ Grid::Grid(const Grid& grid):
 {
 }
 
-inline uint8_t Grid::getSafe(int x, int y)
+inline uint8_t Grid::getStoneSafe(int x, int y)
 {
     if (x < 0 || y < 0 || y >= static_cast<int>(this->mapArray.size()))
     {
@@ -32,6 +32,14 @@ inline uint8_t Grid::getSafe(int x, int y)
 bool Grid::isColumnNotFull(int x)
 {
     return this->getStone(x, 0) == 0;
+}
+
+int Grid::getWinner(void) {
+    if (this->stateOfGame & GAMESTATE_WIN_BIT) {
+        return static_cast<int>(this->stateOfGame & GAMESTATE_PLAYERID_MASK);
+    } else {
+        return -1;
+    }
 }
 
 bool Grid::putStone(int playerId, int column)
@@ -59,13 +67,14 @@ inline void Grid::evaluateStone(int column, int row, int playerId)
     int * diffDirections[5] = {vertical, horizontal, diagonalAsc, diagonalDesc, 0};
     int * diffDirection = 0;
 
+    //check for victoy
     for(int di = 0; di < 4; ++di)
     {
         diffDirection = diffDirections[di];
         x = column + diffDirection[0];
         y = row + diffDirection[1];
         countStones = 1;
-        while(this->getSafe(x, y) == playerId)
+        while(this->getStoneSafe(x, y) == playerId)
         {
             countStones++;
             x += diffDirection[0];
@@ -73,7 +82,7 @@ inline void Grid::evaluateStone(int column, int row, int playerId)
         }
         x = column - diffDirection[0];
         y = row - diffDirection[1];
-        while(this->getSafe(x, y) == playerId)
+        while(this->getStoneSafe(x, y) == playerId)
         {
             countStones++;
             x -= diffDirection[0];
@@ -81,8 +90,13 @@ inline void Grid::evaluateStone(int column, int row, int playerId)
         }
         if (countStones >= 4)
         {
-            //The player won the game
-            this->stateOfGame = (this->stateOfGame | GAMESTATE_WIN_BIT) & (~GAMESTATE_RUNNING_BIT);
+            // The player won the game
+            // remove running bit, remove playerId-area
+            this->stateOfGame &= ~(GAMESTATE_RUNNING_BIT | GAMESTATE_PLAYERID_MASK);
+
+            // set win bit and playerId of winner
+            this->stateOfGame |= GAMESTATE_WIN_BIT | (playerId & GAMESTATE_PLAYERID_MASK);
+
             return;
         }
     }

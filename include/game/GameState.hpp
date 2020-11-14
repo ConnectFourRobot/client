@@ -4,5 +4,6 @@
 #define GAMESTATE_ERROR_BIT 0x80
 #define GAMESTATE_RUNNING_BIT 0x40
 #define GAMESTATE_WIN_BIT 0x20
+#define GAMESTATE_PLAYERID_MASK 0x07 //bits 0x01, 0x02 and 0x04 are reserved for playerId
 
 #endif //!GAME_STATE_ENUM_H
