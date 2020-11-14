@@ -1,6 +1,6 @@
 #include "../include/GameHandler.hpp"
 
-GameHandler::GameHandler(std::string host, unsigned short port) {
+GameHandler::GameHandler(std::string host, unsigned short port): _game(7, 6, 2) {
     // ToDo: connect to broker
     if(DataHandlingService::getInstance().start(host, port) < 0){
         //cant connect to the server
@@ -17,16 +17,24 @@ void GameHandler::run() {
     // Just for testing purposes!!!
     this->_playerNumber = 1;
     // init Game
-    this->_game = Game(7, 6, 2);
+    //this->_game = Game(7, 6, 2);
     // print empty grid
     std::cout << this->_game.currentMap << std::endl;
     // throw stone
-    this->_game.setStone(this->_game.getPlayer(this->_playerNumber), 3, this->_game.currentMap);
+    this->_game.currentMap.putStone(this->_playerNumber, 3);
     // print new grid
     std::cout << this->_game.currentMap << std::endl;
 
     // throw opponent stone
-    this->_game.setStone(this->_game.getPlayer(2), 4, this->_game.currentMap);
+    this->_game.currentMap.putStone(2, 4);
     // print new grid
     std::cout << this->_game.currentMap << std::endl;
+
+    // throw stone
+    this->_game.currentMap.putStone(this->_playerNumber, 3);
+    // print new grid
+    std::cout << this->_game.currentMap << std::endl;
+
+    std::cout << "Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
+
 }

@@ -9,23 +9,14 @@
 
 class Game {
     public:
-        int sizeX;
-        int sizeY;
+        const int sizeX;
+        const int sizeY;
         Grid currentMap;
         std::vector<Player> players;
 
         Game(int sizeX, int sizeY, int numberOfPlayers);
 
-        Game() : sizeX(0), sizeY(0) {};
-
-        /**
-         * Put a stone in a column
-         *
-         * @param Player Owner of the stone
-         * @param column Column in wich the stone gets thrown
-         * @param Grid The corresponding grid
-        */
-        void setStone(Player player, int column, Grid& grid);
+       // Game() : sizeX(0), sizeY(0) {};
 
         /**
          * Get all moves that are possible
