@@ -6,7 +6,7 @@ class Player{
     public:
         uint8_t id;
 
-        Player(uint8_t id) : id(id){};
+        Player(uint8_t id) :id(id){};
         Player() : id(1){};
 };
 #endif
