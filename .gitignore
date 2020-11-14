@@ -6,3 +6,4 @@ bin
 
 # Ignore VSCode files
 .vscode
+.idea/*
