@@ -1,8 +1,13 @@
 #include "../include/GameHandler.hpp"
+#include "../include/player/DebugPlayer.hpp"
+#include "../include/player/RandomMovePlayer.hpp"
+#include "../include/player/SimulatePlayer.hpp"
 
-GameHandler::GameHandler(std::string host, unsigned short port): _game(7, 6, 2) {
+GameHandler::GameHandler(std::string host, unsigned short port): _game(7, 6)
+{
     // ToDo: connect to broker
-    if(DataHandlingService::getInstance().start(host, port) < 0){
+    if(DataHandlingService::getInstance().start(host, port) < 0)
+    {
         //cant connect to the server
         // ToDo: Log-Tool
         std::cout << "Can not connect to broker" << std::endl;
@@ -11,37 +16,41 @@ GameHandler::GameHandler(std::string host, unsigned short port): _game(7, 6, 2) 
     std::cout << "Init vgr-client" << std::endl;
 }
 
-void GameHandler::run() {
+void GameHandler::run()
+{
+    int gameMove;
+    int winner;
     std::cout << "Run vgr-client" << std::endl;
+    std::cout << "Compiled from " << __cplusplus << " at " __DATE__ << " - " << __TIME__ << std::endl;
+    std::cout << "Playing on Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
 
     // Just for testing purposes!!!
+    this->_game.addPlayer(new RandomMovePlayer());
+    this->_game.addPlayer(new RandomMovePlayer());
+
     this->_playerNumber = 1;
-    // init Game
-    //this->_game = Game(7, 6, 2);
-    // print empty grid
-    std::cout << this->_game.currentMap << std::endl;
-    // throw stone
-    this->_game.currentMap.putStone(this->_playerNumber, 3);
-    // print new grid
-    std::cout << this->_game.currentMap << std::endl;
 
-    // throw opponent stone
-    this->_game.currentMap.putStone(2, 4);
-    // print new grid
-    std::cout << this->_game.currentMap << std::endl;
+    while(this->_game.currentMap.isPlayable())
+    {
+        // print current grid
+        std::cout << this->_game.currentMap;
 
-    // throw stone
-    this->_game.currentMap.putStone(this->_playerNumber, 3);
-    // print new grid
-    std::cout << this->_game.currentMap << std::endl;
+        //ask player for move
+        gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
 
-    //find all moves
-    auto moves = PossibleMove::calcPossibleMoves(this->_game.currentMap, this->_game, 2);
-    this->_game.currentMap = moves->next->afterGrid;
+        //validate Move
 
-    // print new grid
-    std::cout << this->_game.currentMap << std::endl;
+        //execute Move
+        this->_game.putStone(gameMove);
+    }
 
-    std::cout << "Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
 
+    std::cout << std::endl << "Game ended. ";
+    winner = this->_game.currentMap.getWinner();
+    if (winner < 0) {
+        std::cout << "It is a draw. ";
+    } else {
+        std::cout << "Player #" << winner << " won. ";
+    }
+    std::cout << "Final grid: " << std::endl << this->_game.currentMap << std::endl;
 }
