@@ -3,6 +3,10 @@
 #include "../include/player/RandomMovePlayer.hpp"
 #include "../include/player/SimulatePlayer.hpp"
 
+
+//TODO delete these tests
+#include "../include/rating/Rating.hpp"
+
 GameHandler::GameHandler(std::string host, unsigned short port): _game(7, 6)
 {
     // ToDo: connect to broker
@@ -39,6 +43,9 @@ void GameHandler::run()
         gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
 
         //validate Move
+
+        //get Rating
+        std::cout << "Rating = " << (Rating(this->_game)).rate(this->_game.currentMap) << std::endl;
 
         //execute Move
         this->_game.putStone(gameMove);
