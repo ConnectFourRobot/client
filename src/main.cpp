@@ -11,7 +11,6 @@ static void printHelp()
 
 int main(int argc, char **argv)
 {
-
     // Default parameter
     std::string ip = "127.0.0.1";
     unsigned short port = 7777;

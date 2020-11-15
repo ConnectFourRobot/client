@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "Grid.hpp"
+#include "../rating/RatingScore.hpp"
+
 class Game;
 class PossibleMove
 {
@@ -13,7 +15,7 @@ public:
     /**
     * evaluation of the move done here
     */
-    int score;
+    intMoveScore score;
 
     /**
     * The move done here
