@@ -36,5 +36,11 @@ public:
      * @return std::vector<PossibleMove> possible moves
     */
     static std::vector<PossibleMove> calcPossibleMoves(Grid & oldGrid, Game & game, int playerId);
+
+    /** default getter for score */
+    inline intMoveScore getScore() {return this->score;}
+
+    /** default setter for score */
+    inline void setScore(intMoveScore score) {this->score = score;}
 };
 #endif

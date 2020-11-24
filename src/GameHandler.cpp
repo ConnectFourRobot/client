@@ -29,8 +29,8 @@ void GameHandler::run()
     std::cout << "Playing on Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
 
     // Just for testing purposes!!!
-    this->_game.addPlayer(new RandomMovePlayer());
-    this->_game.addPlayer(new RandomMovePlayer());
+    this->_game.addPlayer(new SimulatePlayer(7));
+    this->_game.addPlayer(new SimulatePlayer(7));
 
     this->_playerNumber = 1;
 
@@ -45,7 +45,7 @@ void GameHandler::run()
         //validate Move
 
         //get Rating
-        std::cout << "Rating = " << (Rating(this->_game)).rate(this->_game.currentMap) << std::endl;
+        std::cout << "Rating = " << (Rating(this->_game, 1, 0)).rate(this->_game.currentMap) << std::endl;
 
         //execute Move
         this->_game.putStone(gameMove);
@@ -63,4 +63,7 @@ void GameHandler::run()
         std::cout << "Player #" << winner << " won. ";
     }
     std::cout << "Final grid: " << std::endl << this->_game.currentMap << std::endl;
+    char cc;
+    std::cout << "Enter zum Beenden: ";
+    std::cin >> cc;
 }
