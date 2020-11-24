@@ -10,9 +10,10 @@ private:
     Game & game;
     intMoveScore ratePlayable(Grid & grid);
     intMoveScore rateFinished(Grid & grid);
-
+    int playerSelfId;
+    int remainingDeep;
 public:
-    Rating(Game & game);
+    Rating(Game & game, int playerSelfId, int remainingDeep);
     intMoveScore rate(Grid & grid);
 };
 

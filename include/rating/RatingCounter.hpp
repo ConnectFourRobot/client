@@ -25,8 +25,10 @@ private:
     inline void addingAfterBlock(int stone);
     void toRating(void);
 
+    int playerSelfId;
+
 public:
-    RatingCounter();
+    RatingCounter(int playerSelfId);
     intMoveScore getScoreAndReset(void);
     void resetAll();
     void add(int stone);

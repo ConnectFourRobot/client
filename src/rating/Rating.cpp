@@ -6,7 +6,7 @@
 #define minMacro(a, b) (((a) < (b)) ? (a) : (b))
 #define maxMacro(a, b) (((a) > (b)) ? (a) : (b))
 
-Rating::Rating(Game & game): game(game)
+Rating::Rating(Game & game, int playerSelfId, int remainingDeep): game(game), playerSelfId(playerSelfId), remainingDeep(remainingDeep)
 {
 }
 
@@ -25,7 +25,7 @@ intMoveScore Rating::rate(Grid & grid)
 intMoveScore Rating::ratePlayable(Grid & grid)
 {
     int halfX, x, y, toX, toY, toY2;
-    RatingCounter counter;
+    RatingCounter counter(playerSelfId);
 
     //horizontal
     for (y = 0; y < game.sizeY; y++)
@@ -84,9 +84,15 @@ intMoveScore Rating::ratePlayable(Grid & grid)
 
 intMoveScore Rating::rateFinished(Grid & grid)
 {
-    if (grid.stateOfGame & GAMESTATE_WIN_BIT)
-    {
-        return ((grid.stateOfGame & GAMESTATE_PLAYERID_MASK == 1) ? RATING_VICTORY : -RATING_VICTORY);
+    int winner = grid.getWinner();
+    if (winner < 0) {
+        //it is a draw
+        return 0;
+    } else if (winner == this->playerSelfId) {
+        //player 1 won
+        return RATING_VICTORY + this->remainingDeep;
+    } else {
+        //player 2 won
+        return -RATING_VICTORY - this->remainingDeep;
     }
-    return 0;
 }
