@@ -67,7 +67,7 @@ inline void Grid::evaluateStone(int column, int row, int playerId)
     int vertical[] = {0, 1};
     int horizontal[] = {1, 0};
     int diagonalAsc[] = {-1, 1};
-    int diagonalDesc[] = {1, -1};
+    int diagonalDesc[] = {1, 1};
     int * diffDirections[5] = {vertical, horizontal, diagonalAsc, diagonalDesc, 0};
     int * diffDirection = 0;
 
