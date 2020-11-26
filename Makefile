@@ -25,7 +25,7 @@ $(TARGET): $(OBJECTS)
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@mkdir -p $(BUILDDIR) $(BUILDDIR)/game $(BUILDDIR)/network $(BUILDDIR)/player $(BUILDDIR)/util $(BUILDDIR)/factory
+	@mkdir -p $(BUILDDIR) $(BUILDDIR)/game $(BUILDDIR)/network $(BUILDDIR)/player $(BUILDDIR)/util $(BUILDDIR)/factory $(BUILDDIR)/rating $(BUILDDIR)/minmax
 	@$(CC) $(CFLAGS) $(INC) -c -o $@ $< && echo "[OK] $@"
 
 $(TARGET_HT): $(OBJECTS_HT)
