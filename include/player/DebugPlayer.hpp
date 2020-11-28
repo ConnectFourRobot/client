@@ -10,7 +10,7 @@ public:
     DebugPlayer(): Player() {}
 
     /** @inheritdoc */
-    virtual int getMove(Game & game);
+    virtual int getMove(GameSettings & game);
 };
 
 #endif //PLAYER_DEBUGPLAYER_HPP

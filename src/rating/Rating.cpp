@@ -1,12 +1,12 @@
 #include "../../include/rating/Rating.hpp"
 #include "../../include/rating/RatingCounter.hpp"
-#include "../../include/game/Game.hpp"
+#include "../../include/game/GameSettings.hpp"
 #include "../../include/game/Grid.hpp"
 
 #define minMacro(a, b) (((a) < (b)) ? (a) : (b))
 #define maxMacro(a, b) (((a) > (b)) ? (a) : (b))
 
-Rating::Rating(Game & game, int playerSelfId, int remainingDeep): game(game), playerSelfId(playerSelfId), remainingDeep(remainingDeep)
+Rating::Rating(GameSettings & game, int playerSelfId, int remainingDeep): game(game), playerSelfId(playerSelfId), remainingDeep(remainingDeep)
 {
 }
 

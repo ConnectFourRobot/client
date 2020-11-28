@@ -1,5 +1,5 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#ifndef GAME_SETTINGS_HPP
+#define GAME_SETTINGS_HPP
 
 #include <vector>
 
@@ -7,7 +7,7 @@
 #include "../player/Player.hpp"
 #include "PossibleMove.hpp"
 
-class Game
+class GameSettings
 {
 public:
     const int sizeX;
@@ -19,7 +19,7 @@ public:
     /**
      * constructor
     */
-    Game(int sizeX, int sizeY);
+    GameSettings(int sizeX, int sizeY);
 
     /**
      * Add given player to game
@@ -48,4 +48,4 @@ public:
     */
     void putStone(int column);
 };
-#endif
+#endif //GAME_SETTINGS_HPP

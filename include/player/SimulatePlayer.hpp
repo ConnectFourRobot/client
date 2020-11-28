@@ -13,7 +13,7 @@ public:
     SimulatePlayer(int deep = 2);
 
     /** @inheritdoc */
-     virtual int getMove(Game & game);
+     virtual int getMove(GameSettings & game);
 
      /** default setter */
      inline void setDeep(int deep) {this->deep = deep;}

@@ -1,6 +1,6 @@
 #include "../../include/player/RandomMovePlayer.hpp"
 #include "../../include/game/PossibleMove.hpp"
-#include "../../include/game/Game.hpp"
+#include "../../include/game/GameSettings.hpp"
 
 #include <cstdlib>
 #include <ctime>
@@ -10,7 +10,7 @@ RandomMovePlayer::RandomMovePlayer(): Player()
     srand(time(NULL));
 }
 
-int RandomMovePlayer::getMove(Game & game)
+int RandomMovePlayer::getMove(GameSettings & game)
 {
     auto moves = PossibleMove::calcPossibleMoves(game.currentMap, game, this->getId());
     int countMoves = moves.size();

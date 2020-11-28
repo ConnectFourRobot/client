@@ -2,7 +2,7 @@
 #define PLAYER_HPP
 
 #include <cinttypes>
-class Game;
+class GameSettings;
 
 class Player
 {
@@ -35,6 +35,6 @@ public:
     * @param Game & game
     * @return int column (0 - sizeX-1)
     */
-    virtual int getMove(Game & game) = 0;
+    virtual int getMove(GameSettings & game) = 0;
 };
 #endif

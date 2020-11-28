@@ -1,6 +1,6 @@
-#include "../../include/game/Game.hpp"
+#include "../../include/game/GameSettings.hpp"
 
-Game::Game(int sizeX, int sizeY):
+GameSettings::GameSettings(int sizeX, int sizeY):
     //initializer
     sizeX(sizeX),
     sizeY(sizeY),
@@ -10,23 +10,23 @@ Game::Game(int sizeX, int sizeY):
 {
 }
 
-void Game::addPlayer(Player * player)
+void GameSettings::addPlayer(Player * player)
 {
     player->setId(1 + this->players.size());
     this->players.push_back(player);
 }
 
-Player & Game::getPlayer(int8_t playerNumber)
+Player & GameSettings::getPlayer(int8_t playerNumber)
 {
     return *(this->players[playerNumber - 1]);
 }
 
-Player & Game::getCurrentPlayer()
+Player & GameSettings::getCurrentPlayer()
 {
     return this->getPlayer(this->currentPlayerId);
 }
 
-void Game::putStone(int column)
+void GameSettings::putStone(int column)
 {
     this->currentMap.putStone(this->currentPlayerId, column);
     this->currentPlayerId++;

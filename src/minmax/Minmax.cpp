@@ -3,7 +3,7 @@
 
 #define ENABLE_PRUNING true
 
-MinMax::MinMax(Game & game, int playerSelfId): game(game), playerSelfId(playerSelfId)
+MinMax::MinMax(GameSettings & game, int playerSelfId): game(game), playerSelfId(playerSelfId)
 {
 }
 

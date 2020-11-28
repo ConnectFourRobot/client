@@ -2,18 +2,18 @@
 #define RATING_HPP
 
 #include "RatingScore.hpp"
-class Game;
+class GameSettings;
 class Grid;
 
 class Rating {
 private:
-    Game & game;
+    GameSettings & game;
     intMoveScore ratePlayable(Grid & grid);
     intMoveScore rateFinished(Grid & grid);
     int playerSelfId;
     int remainingDeep;
 public:
-    Rating(Game & game, int playerSelfId, int remainingDeep);
+    Rating(GameSettings & game, int playerSelfId, int remainingDeep);
     intMoveScore rate(Grid & grid);
 };
 

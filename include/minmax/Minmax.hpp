@@ -4,12 +4,12 @@
 #include "../rating/RatingScore.hpp"
 #include "../game/PossibleMove.hpp"
 
-class Game;
+class GameSettings;
 
 class MinMax {
 private:
     /** the game containing settings */
-    Game & game;
+    GameSettings & game;
 
     /** evaluate the moves without going deeper */
     inline void rateMoves(std::vector<PossibleMove> & moves, int & resultIndex, intMoveScore & resultRating, intMoveScore pruningMinAlpha, intMoveScore pruningMaxBeta, int playerTurnId, bool isMaximizer);
@@ -25,7 +25,7 @@ private:
     int playerSelfId;
 public:
     /** default constructor */
-    MinMax(Game & game, int playerSelfId);
+    MinMax(GameSettings & game, int playerSelfId);
 
     /** search the best move
     * @param std::vector<PossibleMove> & moves A list of all possible Moves

@@ -1,8 +1,8 @@
 #include "../../include/player/DebugPlayer.hpp"
-#include "../../include/game/Game.hpp"
+#include "../../include/game/GameSettings.hpp"
 #include <iostream>
 
-int DebugPlayer::getMove(Game & game)
+int DebugPlayer::getMove(GameSettings & game)
 {
     int column = 0, i;
     //add column numbers under grid

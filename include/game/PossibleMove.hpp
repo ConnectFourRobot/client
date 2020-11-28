@@ -5,7 +5,7 @@
 #include "Grid.hpp"
 #include "../rating/RatingScore.hpp"
 
-class Game;
+class GameSettings;
 class PossibleMove
 {
 private:
@@ -35,7 +35,7 @@ public:
      * @param int playerId The player whose turn it is.
      * @return std::vector<PossibleMove> possible moves
     */
-    static std::vector<PossibleMove> calcPossibleMoves(Grid & oldGrid, Game & game, int playerId);
+    static std::vector<PossibleMove> calcPossibleMoves(Grid & oldGrid, GameSettings & game, int playerId);
 
     /** default getter for score */
     inline intMoveScore getScore() {return this->score;}

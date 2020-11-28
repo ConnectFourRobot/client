@@ -1,12 +1,12 @@
 #include "../../include/player/SimulatePlayer.hpp"
 #include "../../include/game/PossibleMove.hpp"
-#include "../../include/game/Game.hpp"
+#include "../../include/game/GameSettings.hpp"
 #include "../../include/minmax/Minmax.hpp"
 
 SimulatePlayer::SimulatePlayer(int deep): Player(), deep(deep) {
 }
 
-int SimulatePlayer::getMove(Game & game)
+int SimulatePlayer::getMove(GameSettings & game)
 {
     MinMax minMax(game, this->id);
     std::vector<PossibleMove> moves = PossibleMove::calcPossibleMoves(game.currentMap, game, this->getId());
