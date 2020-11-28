@@ -29,9 +29,9 @@ inline uint8_t Grid::getStoneSafe(int x, int y)
     return mapLine[x];
 }
 
-bool Grid::isColumnNotFull(int x)
+bool Grid::isColumnFull(int x)
 {
-    return this->getStone(x, 0) == 0;
+    return this->getStone(x, 0) != 0;
 }
 
 int Grid::getWinner(void)
@@ -110,7 +110,7 @@ inline void Grid::evaluateStone(int column, int row, int playerId)
     {
         for (x = this->mapArray.size() - 1; x >= 0; x++)
         {
-            if (this->isColumnNotFull(x))
+            if (!(this->isColumnFull(x)))
             {
                 return;
             }

@@ -14,7 +14,7 @@ std::vector<PossibleMove> PossibleMove::calcPossibleMoves(Grid & oldGrid, GameSe
 
     for (int x = 0; x < game.sizeX; ++x)
     {
-        if (oldGrid.isPlayable() && oldGrid.isColumnNotFull(x))
+        if (oldGrid.isPlayable() && !(oldGrid.isColumnFull(x)))
         {
             result.push_back(PossibleMove(oldGrid, x, playerId));
         }

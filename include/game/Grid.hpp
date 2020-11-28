@@ -71,7 +71,7 @@ public:
      * @param int x column (0 - sizeX-1)
      * @return bool false = column is full, true = column has free space
     */
-    bool isColumnNotFull(int x);
+    bool isColumnFull(int x);
 
     /**
     * is the game not terminated yet
