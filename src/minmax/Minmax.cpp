@@ -42,7 +42,7 @@ inline void MinMax::rateMoves(std::vector<PossibleMove> & moves, int & resultInd
 
 void MinMax::getMoveDeeper(std::vector<PossibleMove> & moves, int & resultIndex, intMoveScore & resultRating, intMoveScore pruningMinAlpha, intMoveScore pruningMaxBeta, int deep, int playerTurnId, bool isMaximizer)
 {
-    int countMoves = moves.size(), i = 0, subMovIndex = 0, winner = 0, otherPlayerTurnId = otherPlayer(playerTurnId);
+    int countMoves = moves.size(), i = 0, subMovIndex = 0, otherPlayerTurnId = otherPlayer(playerTurnId);
     intMoveScore subScore = 0;
     deep--;
 
