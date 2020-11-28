@@ -34,7 +34,7 @@ void GameHandler::run()
 
     this->_playerNumber = 1;
 
-    while(this->_game.currentMap.isPlayable())
+    while(this->_game.currentMap.isMovePossible())
     {
         // print current grid
         std::cout << this->_game.currentMap;

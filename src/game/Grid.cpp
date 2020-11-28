@@ -49,7 +49,7 @@ int Grid::getWinner(void)
 bool Grid::putStone(int playerId, int column)
 {
     int freeRow = this->freeRow(column);
-    if (!this->isPlayable() || freeRow < 0)
+    if (!this->isMovePossible() || freeRow < 0)
     {
         //TODO log
         return false;

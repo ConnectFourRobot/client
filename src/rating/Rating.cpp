@@ -12,7 +12,7 @@ Rating::Rating(GameSettings & game, int playerSelfId, int remainingDeep): game(g
 
 intMoveScore Rating::rate(Grid & grid)
 {
-    if (grid.isPlayable())
+    if (grid.isMovePossible())
     {
         return this->ratePlayable(grid);
     }

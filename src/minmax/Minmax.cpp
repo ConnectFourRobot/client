@@ -49,7 +49,7 @@ void MinMax::getMoveDeeper(std::vector<PossibleMove> & moves, int & resultIndex,
     for (i = 0; i < countMoves; i++)
     {
         PossibleMove & mov = moves[i];
-        if (mov.afterGrid.isPlayable())
+        if (mov.afterGrid.isMovePossible())
         {
             std::vector<PossibleMove> subMoves = PossibleMove::calcPossibleMoves(mov.afterGrid, this->game, otherPlayerTurnId);
             this->getMove(subMoves, subMovIndex, subScore, pruningMinAlpha, pruningMaxBeta, deep, otherPlayerTurnId);

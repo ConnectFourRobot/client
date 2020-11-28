@@ -74,12 +74,13 @@ public:
     bool isColumnFull(int x);
 
     /**
-    * is the game not terminated yet
+    * is the game still playable
+    * equals to: is the game not terminated yet
     * equals to: no winner and no draw yet
     *
     * @return bool true if there is an insertable stone
     */
-    inline bool isPlayable(void)
+    inline bool isMovePossible(void)
     {
         return (this->stateOfGame & GAMESTATE_RUNNING_BIT) && !(this->stateOfGame & GAMESTATE_ERROR_BIT);
     }
