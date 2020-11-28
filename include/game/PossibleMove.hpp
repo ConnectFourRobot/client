@@ -19,22 +19,23 @@ private:
      * @param int playerId (1-2) */
     PossibleMove(const Grid & oldGrid, int column, int playerId);
 
-public:
+protected:
     /**
     * evaluation of the move done here
     */
-    intMoveScore score;
+    intMoveScore _score;
 
     /**
     * The move done here (0 - sizeX-1)
     */
-    const int moveColumn;
+    const int _moveColumn;
 
     /**
     * The grid after the move is done
     */
-    Grid afterGrid;
+    Grid _afterGrid;
 
+public:
     /**
      * Get all moves that are possible
      *
@@ -46,9 +47,14 @@ public:
     static std::vector<PossibleMove> calcPossibleMoves(Grid & oldGrid, GameSettings & game, int playerId);
 
     /** default getter for score */
-    inline intMoveScore getScore() {return this->score;}
+    inline intMoveScore getScore() const {return this->_score;}
 
     /** default setter for score */
-    inline void setScore(intMoveScore score) {this->score = score;}
+    inline void setScore(intMoveScore score) {this->_score = score;}
+
+    /** default getter for moveColumn */
+    inline const int getMoveColumn() const {return this->_moveColumn;}
+
+    inline Grid & getAfterGrid() {return this->_afterGrid;}
 };
 #endif

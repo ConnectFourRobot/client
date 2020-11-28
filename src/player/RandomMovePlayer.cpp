@@ -16,6 +16,7 @@ int RandomMovePlayer::getMove(GameSettings & game)
     int countMoves = moves.size();
     int resultMoveIndex = rand() % countMoves;
 
-    std::cout << "Found " << countMoves << " Moves. Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].moveColumn + 1) << std::endl;
-    return moves[resultMoveIndex].moveColumn;
+    //TODO to logger
+    std::cout << "Found " << countMoves << " Moves. Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
+    return moves[resultMoveIndex].getMoveColumn();
 }

@@ -15,6 +15,7 @@ int SimulatePlayer::getMove(GameSettings & game)
 
     minMax.getMove(moves, resultMoveIndex, resultRating, -RATING_VICTORY, RATING_VICTORY, this->deep, this->id);
 
-    std::cout << "Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].moveColumn + 1) << std::endl;
-    return moves[resultMoveIndex].moveColumn;
+    //TODO to logger
+    std::cout << "Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
+    return moves[resultMoveIndex].getMoveColumn();
 }

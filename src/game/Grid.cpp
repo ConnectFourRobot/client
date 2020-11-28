@@ -15,13 +15,13 @@ Grid::Grid(const Grid& grid):
 {
 }
 
-inline uint8_t Grid::getStoneSafe(int x, int y)
+uint8_t Grid::getStoneSafe(int x, int y) const
 {
     if (x < 0 || y < 0 || y >= static_cast<int>(this->mapArray.size()))
     {
         return 255;
     }
-    std::vector<uint8_t> & mapLine = this->mapArray[y];
+    const std::vector<uint8_t> & mapLine = this->mapArray[y];
     if (x >= static_cast<int>(mapLine.size()))
     {
         return 255;
@@ -34,7 +34,7 @@ bool Grid::isColumnFull(int x)
     return this->getStone(x, 0) != 0;
 }
 
-int Grid::getWinner(void)
+int Grid::getWinner(void) const
 {
     if (this->stateOfGame & GAMESTATE_WIN_BIT)
     {

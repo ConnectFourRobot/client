@@ -31,7 +31,7 @@ inline void MinMax::rateMoves(std::vector<PossibleMove> & moves, int & resultInd
     for (i = 0; i < countMoves; i++)
     {
         PossibleMove & mov = moves[i];
-        mov.setScore(rating.rate(mov.afterGrid));
+        mov.setScore(rating.rate(mov.getAfterGrid()));
         if (this->evaluateScore(mov, i, resultIndex, resultRating, pruningMinAlpha, pruningMaxBeta, isMaximizer))
         {
             // cut off because of pruning
@@ -49,16 +49,16 @@ void MinMax::getMoveDeeper(std::vector<PossibleMove> & moves, int & resultIndex,
     for (i = 0; i < countMoves; i++)
     {
         PossibleMove & mov = moves[i];
-        if (mov.afterGrid.isMovePossible())
+        if (mov.getAfterGrid().isMovePossible())
         {
-            std::vector<PossibleMove> subMoves = PossibleMove::calcPossibleMoves(mov.afterGrid, this->game, otherPlayerTurnId);
+            std::vector<PossibleMove> subMoves = PossibleMove::calcPossibleMoves(mov.getAfterGrid(), this->game, otherPlayerTurnId);
             this->getMove(subMoves, subMovIndex, subScore, pruningMinAlpha, pruningMaxBeta, deep, otherPlayerTurnId);
             mov.setScore(subScore);
         }
         else     //mov is not playable
         {
             Rating rating(this->game, this->playerSelfId, deep + 1);
-            mov.setScore(rating.rate(mov.afterGrid));
+            mov.setScore(rating.rate(mov.getAfterGrid()));
         }
         if (this->evaluateScore(mov, i, resultIndex, resultRating, pruningMinAlpha, pruningMaxBeta, isMaximizer))
         {

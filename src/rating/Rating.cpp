@@ -10,7 +10,7 @@ Rating::Rating(GameSettings & game, int playerSelfId, int remainingDeep): game(g
 {
 }
 
-intMoveScore Rating::rate(Grid & grid)
+intMoveScore Rating::rate(const Grid & grid)
 {
     if (grid.isMovePossible())
     {
@@ -22,7 +22,7 @@ intMoveScore Rating::rate(Grid & grid)
     }
 }
 
-intMoveScore Rating::ratePlayable(Grid & grid)
+intMoveScore Rating::ratePlayable(const Grid & grid)
 {
     int halfX, x, y, toX, toY, toY2;
     RatingCounter counter(playerSelfId);
@@ -32,7 +32,7 @@ intMoveScore Rating::ratePlayable(Grid & grid)
     {
         for (x = 0; x < game.sizeX; x++)
         {
-            counter.add(grid.getStone(x, y));
+            counter.add(grid.getStoneSafe(x, y));
         }
         counter.nextBlock();
     }
@@ -42,7 +42,7 @@ intMoveScore Rating::ratePlayable(Grid & grid)
     {
         for (y = 0; y < game.sizeY; y++)
         {
-            counter.add(grid.getStone(x, y));
+            counter.add(grid.getStoneSafe(x, y));
         }
         counter.nextBlock();
     }
@@ -60,7 +60,7 @@ intMoveScore Rating::ratePlayable(Grid & grid)
             y = x + 1 - game.sizeY + halfX;
             for (y = maxMacro(-x, y); y < toY; y++)
             {
-                counter.add(grid.getStone(x + y, x - y + halfX));
+                counter.add(grid.getStoneSafe(x + y, x - y + halfX));
             }
             counter.nextBlock();
         }
@@ -74,7 +74,7 @@ intMoveScore Rating::ratePlayable(Grid & grid)
             y = x - halfX;
             for (y = maxMacro(-x, y); y < toY; y++)
             {
-                counter.add(grid.getStone(y + x, y - x + halfX));
+                counter.add(grid.getStoneSafe(y + x, y - x + halfX));
             }
             counter.nextBlock();
         }
@@ -82,7 +82,7 @@ intMoveScore Rating::ratePlayable(Grid & grid)
     return counter.getScoreAndReset();
 }
 
-intMoveScore Rating::rateFinished(Grid & grid)
+intMoveScore Rating::rateFinished(const Grid & grid)
 {
     int winner = grid.getWinner();
     if (winner < 0) {

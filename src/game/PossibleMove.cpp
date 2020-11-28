@@ -2,9 +2,9 @@
 #include "../../include/game/Grid.hpp"
 #include "../../include/game/GameSettings.hpp"
 
-PossibleMove::PossibleMove(const Grid & oldGrid, int column, int playerId) : moveColumn(column), afterGrid(oldGrid)
+PossibleMove::PossibleMove(const Grid & oldGrid, int column, int playerId) : _score(0), _moveColumn(column), _afterGrid(oldGrid)
 {
-    this->afterGrid.putStone(playerId, column);
+    this->_afterGrid.putStone(playerId, column);
 };
 
 std::vector<PossibleMove> PossibleMove::calcPossibleMoves(Grid & oldGrid, GameSettings & game, int playerId)

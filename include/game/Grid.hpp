@@ -64,7 +64,7 @@ public:
      * @param int y Y Coordinate of the stone (0 - sizeY-1, otherwise out of bounds)
      * @return uint8_t value of the coordinates
     */
-    inline uint8_t getStoneSafe(int x, int y);
+    uint8_t getStoneSafe(int x, int y) const;
 
     /**
      * is there still a place for another stone in the column
@@ -80,7 +80,7 @@ public:
     *
     * @return bool true if there is an insertable stone
     */
-    inline bool isMovePossible(void)
+    inline bool isMovePossible(void) const
     {
         return (this->stateOfGame & GAMESTATE_RUNNING_BIT) && !(this->stateOfGame & GAMESTATE_ERROR_BIT);
     }
@@ -91,7 +91,7 @@ public:
     *
     * @return int playerId or -1 for a draw
     */
-    int getWinner(void);
+    int getWinner(void) const;
 
     /**
     * Put a stone in a column

@@ -14,10 +14,10 @@ private:
     const GameSettings & game;
 
     /** evaluate a game which will be continued later */
-    intMoveScore ratePlayable(Grid & grid);
+    intMoveScore ratePlayable(const Grid & grid);
 
     /** evaluate a terminated game */
-    intMoveScore rateFinished(Grid & grid);
+    intMoveScore rateFinished(const Grid & grid);
 
     /** evaluate for which player */
     int playerSelfId;
@@ -29,7 +29,7 @@ public:
     Rating(GameSettings & game, int playerSelfId, int remainingDeep);
 
     /** evaluate the grid */
-    intMoveScore rate(Grid & grid);
+    intMoveScore rate(const Grid & grid);
 };
 
 #endif // RATING_HPP
