@@ -3,6 +3,7 @@
 
 #include "Player.hpp"
 
+/** A human player playing in debug console */
 class DebugPlayer : public Player
 {
 public:

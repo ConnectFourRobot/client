@@ -3,9 +3,11 @@
 
 #include "Player.hpp"
 
+/** the default KI-Player thinking about a best move */
 class SimulatePlayer : public Player
 {
 protected:
+    /** how deep the bot should search for the best move */
     int deep;
 
 public:

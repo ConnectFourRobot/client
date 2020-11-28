@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 
+/** parser for main arguments */
 class InputParser
 {
 private:

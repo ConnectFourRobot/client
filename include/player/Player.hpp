@@ -4,6 +4,7 @@
 #include <cinttypes>
 class GameSettings;
 
+/** abstract class Player participating the game*/
 class Player
 {
 protected:

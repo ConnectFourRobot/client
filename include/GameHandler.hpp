@@ -7,6 +7,7 @@
 #include "game/GameSettings.hpp"
 #include "network/DataHandlingService.hpp"
 
+/** main class */
 class GameHandler
 {
 private:

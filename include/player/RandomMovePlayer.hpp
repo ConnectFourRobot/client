@@ -3,6 +3,7 @@
 
 #include "Player.hpp"
 
+/** a player using a random valid move each time */
 class RandomMovePlayer : public Player
 {
 public:

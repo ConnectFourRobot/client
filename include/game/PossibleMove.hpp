@@ -5,10 +5,18 @@
 #include "Grid.hpp"
 #include "../rating/RatingScore.hpp"
 
+// extern included types
 class GameSettings;
+
+/** a single possible move */
 class PossibleMove
 {
 private:
+    /** constructor
+     * executes the move and stores the new grid
+     * @param const Grid & oldGrid the grid, into which a stone will be inserted
+     * @param int column the column-id into which a stone will be inserted (0 - sizeX-1)
+     * @param int playerId (1-2) */
     PossibleMove(const Grid & oldGrid, int column, int playerId);
 
 public:
@@ -18,7 +26,7 @@ public:
     intMoveScore score;
 
     /**
-    * The move done here
+    * The move done here (0 - sizeX-1)
     */
     const int moveColumn;
 

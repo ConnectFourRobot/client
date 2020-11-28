@@ -7,6 +7,7 @@
 #include "../player/Player.hpp"
 #include "PossibleMove.hpp"
 
+/** The GameSettings, which do not change during a game is played. */
 class GameSettings
 {
 public:

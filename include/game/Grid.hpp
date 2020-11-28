@@ -5,9 +5,11 @@
 #include <iostream>
 #include "GameState.hpp"
 
+/** The values of a game, which usually change during a game */
 class Grid
 {
 public:
+    /** unoccupied field value */
     static const uint8_t EMPTY_FIELD = 0;
 
 public:
@@ -43,10 +45,10 @@ public:
     Grid(const Grid&);
 
     /**
-     * Get the value on a coordinate
+     * Get the value-reference on a coordinate for read and write
      *
-     * @param int x X Coordinate of the stone
-     * @param int y Y Coordinate of the stone
+     * @param int x X Coordinate of the stone (0 - sizeX-1)
+     * @param int y Y Coordinate of the stone (0 - sizeY-1)
      * @return uint8_t& value of the coordinates
     */
     inline uint8_t& getStone(int x, int y)
@@ -55,11 +57,11 @@ public:
     }
 
     /**
-     * Get the value on a coordinate, if it is inbound
+     * Get the value on a coordinate read-only, if it is inbound
      * Otherwise (out of bounds) the value 255 will be returned
      *
-     * @param int x X Coordinate of the stone
-     * @param int y Y Coordinate of the stone
+     * @param int x X Coordinate of the stone (0 - sizeX-1, otherwise out of bounds)
+     * @param int y Y Coordinate of the stone (0 - sizeY-1, otherwise out of bounds)
      * @return uint8_t value of the coordinates
     */
     inline uint8_t getStoneSafe(int x, int y);
@@ -72,6 +74,9 @@ public:
     bool isColumnNotFull(int x);
 
     /**
+    * is the game not terminated yet
+    * equals to: no winner and no draw yet
+    *
     * @return bool true if there is an insertable stone
     */
     inline bool isPlayable(void)
@@ -81,6 +86,7 @@ public:
 
     /**
     * Get the winner of a terminated game
+    * The result is useless if the game is still playable
     *
     * @return int playerId or -1 for a draw
     */
@@ -88,9 +94,10 @@ public:
 
     /**
     * Put a stone in a column
+    * The stone will fall down by itself
     *
     * @param int playerId Owner of the stone
-    * @param column Column in wich the stone gets thrown
+    * @param column Column in which the stone gets thrown
     * @return bool has a stone been inserted
     */
     bool putStone(int playerId, int column);
