@@ -5,7 +5,7 @@
 #define maxIndexMacro(arr,i1,i2) (((arr[i2]) > (arr[i1])) ? (i2) : (i1))
 #define hasOneMacro(a) (((a) > 0) ? 1 : 0)
 
-RatingCounter::RatingCounter(int playerSelfId): playerSelfId(playerSelfId) {
+RatingCounter::RatingCounter(const int playerSelfId): playerSelfId(playerSelfId) {
     this->resetAll();
 }
 
@@ -135,7 +135,9 @@ void RatingCounter::resetAll(void) {
 }
 
 intMoveScore RatingCounter::getScoreAndReset(void) {
-    intMoveScore result = this->score;
+    intMoveScore result = 0;
+    this->toRating();
+    result = this->score;
     this->resetAll();
     return result;
 }
