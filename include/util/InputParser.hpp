@@ -19,5 +19,8 @@ public:
 
     /** */
     bool cmdOptionExists(const std::string &option) const;
+
+    std::string useStringCmdOption(const char * letter, const char * option, const char * defaultValue) const;
+    int useIntCmdOption(const char * letter, const char * option, const char * defaultValue) const;
 };
 #endif

@@ -15,7 +15,7 @@ private:
     GameSettings _game;
 public:
     /** constructor */
-    GameHandler(std::string host, unsigned short port);
+    GameHandler(std::string host, unsigned short port, int rows, int columns, int playerId, int level);
 
     /** destructor */
     ~GameHandler();

@@ -7,7 +7,7 @@
 //TODO delete these tests
 #include "../include/rating/Rating.hpp"
 
-GameHandler::GameHandler(std::string host, unsigned short port): _game(7, 6)
+GameHandler::GameHandler(std::string host, unsigned short port, int rows, int columns, int playerId, int level): _game(columns, rows)
 {
     // ToDo: connect to broker
     if(DataHandlingService::getInstance().start(host, port) < 0)
@@ -15,7 +15,7 @@ GameHandler::GameHandler(std::string host, unsigned short port): _game(7, 6)
         //cannot connect to the server
         // ToDo: Log-Tool
         std::cout << "Cannot connect to broker" << std::endl;
-        exit(0);
+        exit(-1);
     }
     std::cout << "Init vgr-client" << std::endl;
 }
