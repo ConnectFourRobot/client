@@ -63,24 +63,14 @@ class ServerNetworkMessage : public NetworkMessage
 {
     // We do not know, which servermessage is coming
     // so this is a temporary solution, but it is not in a good oop way
-private:
-    struct GameConfigStruct
-    {
-        int8_t playerNumber;
-    };
-    struct MoveStruct
-    {
-        int8_t x;
-        int8_t playerNumber;
-    };
-    struct EndGameStruct
-    {
-        int8_t playerNumber;
-    };
+protected:
+    int8_t _playerId, _column;
+
 public:
-    MoveStruct move;
-    GameConfigStruct gameConfig;
-    EndGameStruct endGame;
     ServerNetworkMessage(NetworkMessageType type, unsigned int size, std::string serverMessage);
+    inline NetworkMessageType getType() const {return this->_type;}
+    inline int8_t getPlayerId() const {return this->_playerId;}
+    inline int8_t getColumn() const {return this->_column;}
 };
+
 #endif

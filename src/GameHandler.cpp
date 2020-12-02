@@ -2,13 +2,14 @@
 #include "../include/player/DebugPlayer.hpp"
 #include "../include/player/RandomMovePlayer.hpp"
 #include "../include/player/SimulatePlayer.hpp"
-
+#include "../include/player/NetworkPlayer.hpp"
 
 //TODO delete these tests
 #include "../include/rating/Rating.hpp"
 
 GameHandler::GameHandler(std::string host, unsigned short port, int rows, int columns, int playerId, int level): _game(columns, rows)
 {
+    Player * playerKi = 0;
     // ToDo: connect to broker
     if(DataHandlingService::getInstance().start(host, port) < 0)
     {
@@ -18,9 +19,80 @@ GameHandler::GameHandler(std::string host, unsigned short port, int rows, int co
         exit(-1);
     }
     std::cout << "Init vgr-client" << std::endl;
+
+    switch (level)
+    {
+    case 0:
+        playerKi = new SimulatePlayer(2);
+        break;
+    case 1:
+        playerKi = new SimulatePlayer(4);
+        break;
+    case 2:
+        playerKi = new SimulatePlayer(6);
+        break;
+    default:
+        playerKi = new SimulatePlayer(1);
+        break;
+    }
+
+    switch (playerId)
+    {
+    case 1:
+        this->_game.addPlayer(playerKi);
+        this->_game.addPlayer(new NetworkPlayer());
+        break;
+    case 2:
+        this->_game.addPlayer(new NetworkPlayer());
+        this->_game.addPlayer(playerKi);
+        break;
+
+    }
 }
 
-void GameHandler::run()
+void GameHandler::run(void)
+{
+    DataHandlingService & service = DataHandlingService::getInstance();
+
+    while(true)
+    {
+        ServerNetworkMessage message = service.receiveMessage();
+        switch (message.getType())
+        {
+        case NetworkMessageType::Request:
+            this->runRequest();
+            break;
+        case NetworkMessageType::Move:
+            this->runMove(message.getColumn(), message.getPlayerId());
+            break;
+        case NetworkMessageType::EndGame:
+            return;
+        case NetworkMessageType::Answer:
+        default:
+            std::cout << "error - invalid Messagetype: " << message.getType() << std::endl;
+            //error
+            break;
+        }
+    }
+}
+
+void GameHandler::runRequest(void)
+{
+    std::cout << "RunRequest()" << std::endl;
+    int gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
+    //TODO do not use getCurrentPlayer
+    DataHandlingService & service = DataHandlingService::getInstance();
+    service.sendMessage(ClientNetworkMessage(gameMove));
+}
+
+void GameHandler::runMove(int column, int playerId)
+{
+    std::cout << "RunMove(" << column << ", " << playerId << ")" << std::endl;
+    //TODO check playerId
+    this->_game.putStone(column);
+}
+
+void GameHandler::runDebug(void)
 {
     int gameMove;
     int winner;

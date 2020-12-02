@@ -13,6 +13,9 @@ class GameHandler
 private:
     short _playerNumber;
     GameSettings _game;
+
+    void runRequest(void);
+    void runMove(int column, int playerId);
 public:
     /** constructor */
     GameHandler(std::string host, unsigned short port, int rows, int columns, int playerId, int level);
@@ -23,6 +26,7 @@ public:
     /**
      * starts the gamehandler
     */
-    void run();
+    void run(void);
+    void runDebug(void);
 };
 #endif

@@ -43,10 +43,11 @@ NetworkMessage::~NetworkMessage()
 
 ClientNetworkMessage::ClientNetworkMessage(int8_t column)
 {
+    const int size = 1;
     this->_type = NetworkMessageType::Answer;
-    this->_size = 1;
+    this->_size = size;
     // char pointer for payload
-    char cp[this->_size];
+    char cp[size];
     *cp = column;
 
     this->_message = std::string(cp, this->_size);
@@ -56,20 +57,21 @@ ServerNetworkMessage::ServerNetworkMessage(NetworkMessageType type, unsigned int
 {
     this->_type = type;
     this->_size = size;
-
     this->_message = serverMessage;
+    this->_column = 0;
+    this->_playerId = 0;
 
     switch (type)
     {
-    case NetworkMessageType::Configuration:
-        this->gameConfig.playerNumber = serverMessage.at(0);
-        break;
+//    case NetworkMessageType::Configuration:
+//        this->gameConfig.playerNumber = serverMessage.at(0);
+//        break;
     case NetworkMessageType::Move:
-        this->move.x = serverMessage.at(0);
-        this->move.playerNumber = serverMessage.at(1);
+        this->_column = serverMessage.at(0);
+        this->_playerId = serverMessage.at(1);
         break;
     case NetworkMessageType::EndGame:
-        this->endGame.playerNumber = serverMessage.at(0);
+        this->_playerId = serverMessage.at(0);
         break;
     default:
         break;
