@@ -40,6 +40,14 @@ int main(int argc, char **argv)
         int rows = input.useIntCmdOption("-r", "--rows", "6");
         int playerId = input.useIntCmdOption("-w", "--who", "1");
         int level = input.useIntCmdOption("-l", "--level", "1");
+
+        std::cout << "Start VGR_CLIENT compiled at " __DATE__ " - " __TIME__ " with Linux: " << 
+        #ifdef __linux__
+            "yes"
+        #else
+            "no"
+        #endif
+        << std::endl;
         if(input.cmdOptionExists("-h") || input.cmdOptionExists("--help"))
         {
             printHelp();
