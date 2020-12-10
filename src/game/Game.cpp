@@ -3,7 +3,7 @@
 Game::Game(int sizeX, int sizeY, int numberOfPlayers) {
     // init grid
     Grid grid(sizeX, sizeY);
-    
+
     // init players
     std::vector<Player> players;
     for(uint8_t i = 1; i <= numberOfPlayers; i++){
@@ -52,7 +52,7 @@ Player Game::getPlayer(int8_t playerNumber){
 
 bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
     int lineSize = 4;
-    // verticalCheck 
+    // verticalCheck
     for (int y = 0; y < this->sizeY-3 ; y++ ){
         for (int x = 0; x < this->sizeX; x++){
             bool brk = false;
@@ -70,7 +70,7 @@ bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
             }
             if(brk == false) {
                 return true;
-            }          
+            }
         }
     }
 
@@ -92,10 +92,10 @@ bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
             }
             if(!brk) {
                 return true;
-            }     
+            }
         }
     }
-    // ascendingDiagonalCheck 
+    // ascendingDiagonalCheck
     for (int x=3; x < this->sizeX; x++){
         for (int y=0; y < this->sizeY-3; y++){
             bool brk = false;
@@ -113,7 +113,7 @@ bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
             }
             if(!brk) {
                 return true;
-            }     
+            }
         }
     }
     // descendingDiagonalCheck
@@ -134,7 +134,7 @@ bool Game::checkLine(int numberOfStones, Grid& grid, Player player) {
             }
             if(!brk) {
                 return true;
-            }     
+            }
         }
     }
     return false;

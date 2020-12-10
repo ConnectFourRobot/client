@@ -8,7 +8,7 @@
 #include "PossibleMove.hpp"
 
 class Game {
-    public: 
+    public:
         int sizeX;
         int sizeY;
         Grid currentMap;
@@ -30,8 +30,8 @@ class Game {
         /**
          * Get all moves that are possible
          *
-         * @param player The Player for wich this should be calculated 
-         * @param grid Grid on wich this should be calculated 
+         * @param player The Player for wich this should be calculated
+         * @param grid Grid on wich this should be calculated
          * @return possible moves
         */
         std::vector<PossibleMove> getPossibleMoves(Player player, Grid grid);

@@ -5,7 +5,7 @@
 
 class PossibleMove{
     public:
-        PossibleMove(int move, Grid grid) : 
+        PossibleMove(int move, Grid grid) :
             move(move), afterGrid(grid){};
         PossibleMove() {};
         int score;

@@ -5,13 +5,14 @@
 
 #include <iostream>
 #include "game/Game.hpp"
+#include "network/DataHandlingService.hpp"
 
 class GameHandler{
     private:
         short _playerNumber;
         Game _game;
     public:
-        GameHandler();
+        GameHandler(std::string host, unsigned short port);
         
         /**
          * starts the gamehandler
