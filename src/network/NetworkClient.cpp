@@ -1,5 +1,4 @@
 #include "../../include/network/NetworkClient.hpp"
-#ifdef __linux__
 
 int NetworkClient::connect()
 {
@@ -62,5 +61,3 @@ NetworkClient::~NetworkClient()
 {
     _sock = 0;
 }
-
-#endif
