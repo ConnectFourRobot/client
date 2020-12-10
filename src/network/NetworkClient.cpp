@@ -1,5 +1,4 @@
 #include "../../include/network/NetworkClient.hpp"
-#ifdef __linux__
 
 int NetworkClient::connect(){
     if ((_sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -57,5 +56,3 @@ void NetworkClient::send(std::string message){
 NetworkClient::~NetworkClient(){
     _sock = 0;
 }
-
-#endif
