@@ -16,6 +16,11 @@ protected:
     NetworkMessageType _type;
     uint8_t _size;
     std::string _message;
+
+protected:
+    /** NetworkMessage is abstract, so no public constructors */
+    NetworkMessage(): _type(NetworkMessageType::Unknown), _size(0), _message("") {}
+
 public:
     const static short typeSize = 1;
     const static short sizeSize = 1;
@@ -56,7 +61,10 @@ public:
 class ClientNetworkMessage : public NetworkMessage
 {
 public:
-    ClientNetworkMessage(int8_t column);
+    ClientNetworkMessage(): NetworkMessage() {};
+
+    ClientNetworkMessage & setAnswerColumn(int8_t column);
+    ClientNetworkMessage & setRegisterMessage();
 };
 
 class ServerNetworkMessage : public NetworkMessage

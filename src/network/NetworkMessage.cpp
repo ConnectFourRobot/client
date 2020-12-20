@@ -41,16 +41,32 @@ NetworkMessage::~NetworkMessage()
 
 }
 
-ClientNetworkMessage::ClientNetworkMessage(int8_t column)
+ClientNetworkMessage & ClientNetworkMessage::setAnswerColumn(int8_t column)
 {
     const int size = 1;
     this->_type = NetworkMessageType::Answer;
     this->_size = size;
     // char pointer for payload
-    char cp[size];
-    *cp = column;
+    char cp[size + 1];
+    cp[0] = column;
+    cp[size] = '\0';
 
     this->_message = std::string(cp, this->_size);
+    return *this;
+}
+
+ClientNetworkMessage & ClientNetworkMessage::setRegisterMessage()
+{
+    const int size = 1;
+    this->_type = NetworkMessageType::Register;
+    this->_size = size;
+    // char pointer for payload
+    char cp[size + 1];
+    cp[0] = NETWORK_REGISTER_CODE;
+    cp[size] = '\0';
+
+    this->_message = std::string(cp, this->_size);
+    return *this;
 }
 
 ServerNetworkMessage::ServerNetworkMessage(NetworkMessageType type, unsigned int size, std::string serverMessage)

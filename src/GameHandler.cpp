@@ -80,9 +80,11 @@ void GameHandler::runRequest(void)
 {
     std::cout << "RunRequest()" << std::endl;
     int gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
+    ClientNetworkMessage message;
+    message.setAnswerColumn(gameMove);
     //TODO do not use getCurrentPlayer
     DataHandlingService & service = DataHandlingService::getInstance();
-    service.sendMessage(ClientNetworkMessage(gameMove));
+    service.sendMessage(message);
 }
 
 void GameHandler::runMove(int column, int playerId)
