@@ -8,7 +8,7 @@ class GameSettings;
 class Player
 {
 protected:
-    /** playerId */
+    /** playerId. begins with 1. */
     uint8_t id;
 
 public:
@@ -24,7 +24,7 @@ public:
         this->id = id;
     }
 
-    /** getter for playerId */
+    /** getter for playerId. Begins with 1. */
     inline int getId() const
     {
         return this->id;
