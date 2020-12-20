@@ -53,6 +53,7 @@ GameHandler::GameHandler(std::string host, unsigned short port, int rows, int co
 void GameHandler::run(void)
 {
     DataHandlingService & service = DataHandlingService::getInstance();
+    this->runRegisterClientAtBroker();
 
     while(true)
     {
@@ -76,7 +77,7 @@ void GameHandler::run(void)
     }
 }
 
-void GameHandler::runRequest(void)
+inline void GameHandler::runRequest(void)
 {
     std::cout << "RunRequest()" << std::endl;
     int gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
@@ -87,11 +88,22 @@ void GameHandler::runRequest(void)
     service.sendMessage(message);
 }
 
-void GameHandler::runMove(int column, int playerId)
+inline void GameHandler::runMove(int column, int playerId)
 {
     std::cout << "RunMove(" << column << ", " << playerId << ")" << std::endl;
     //TODO check playerId
     this->_game.putStone(column);
+}
+
+inline void GameHandler::runRegisterClientAtBroker(void)
+{
+    std::cout << "Register to Broker with 42" << std::endl;
+    std::cout.flush();
+    ClientNetworkMessage message;
+    message.setRegisterMessage();
+
+    DataHandlingService & service = DataHandlingService::getInstance();
+    service.sendMessage(message);
 }
 
 void GameHandler::runDebug(void)
