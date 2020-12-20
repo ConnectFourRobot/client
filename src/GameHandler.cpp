@@ -10,7 +10,6 @@
 GameHandler::GameHandler(std::string host, unsigned short port, int rows, int columns, int playerId, int level): _game(columns, rows)
 {
     Player * playerKi = 0;
-    // ToDo: connect to broker
     if(DataHandlingService::getInstance().start(host, port) < 0)
     {
         //cannot connect to the server
@@ -81,6 +80,10 @@ inline void GameHandler::runRequest(void)
 {
     std::cout << "RunRequest()" << std::endl;
     std::cout.flush();
+    if (this->_game.getCurrentPlayer().getId() != this->_playerNumber + 1) {
+        throw "Invalid Move Request. It is not my turn.";
+    }
+
     int gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
     ClientNetworkMessage message;
     message.setAnswerColumn(gameMove);
@@ -116,10 +119,6 @@ void GameHandler::runDebug(void)
     std::cout << "Run vgr-client" << std::endl;
     std::cout << "Compiled from " << __cplusplus << " at " __DATE__ << " - " << __TIME__ << std::endl;
     std::cout << "Playing on Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
-
-    // Just for testing purposes!!!
-    this->_game.addPlayer(new SimulatePlayer(7));
-    this->_game.addPlayer(new SimulatePlayer(7));
 
     this->_playerNumber = 1;
 
