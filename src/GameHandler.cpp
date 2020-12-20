@@ -46,7 +46,6 @@ GameHandler::GameHandler(std::string host, unsigned short port, int rows, int co
         this->_game.addPlayer(new NetworkPlayer());
         this->_game.addPlayer(playerKi);
         break;
-
     }
 }
 
@@ -70,6 +69,7 @@ void GameHandler::run(void)
             return;
         case NetworkMessageType::Answer:
         default:
+        //TODO move all cout to logger
             std::cout << "error - invalid Messagetype: " << message.getType() << std::endl;
             //error
             break;
@@ -80,6 +80,7 @@ void GameHandler::run(void)
 inline void GameHandler::runRequest(void)
 {
     std::cout << "RunRequest()" << std::endl;
+    std::cout.flush();
     int gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
     ClientNetworkMessage message;
     message.setAnswerColumn(gameMove);
@@ -91,8 +92,10 @@ inline void GameHandler::runRequest(void)
 inline void GameHandler::runMove(int column, int playerId)
 {
     std::cout << "RunMove(" << column << ", " << playerId << ")" << std::endl;
+    std::cout.flush();
     //TODO check playerId
     this->_game.putStone(column);
+    std::cout << this->_game.currentMap << std::endl;
 }
 
 inline void GameHandler::runRegisterClientAtBroker(void)
