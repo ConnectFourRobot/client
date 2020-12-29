@@ -21,9 +21,9 @@ GameHandler * createGameHandler(int argc, char ** argv) {
         std::string ip = input.useStringCmdOption("-i", "--ip", "IP-Address", "127.0.0.1", "IP-v4-only");
         int portRaw = input.useIntCmdOption("-p", "--port", "Port", "7777", "any Port");
         unsigned short port = static_cast<unsigned short>(portRaw);
-        int columns = input.useIntCmdOption("-c", "--columns", "The columns/length of the game", "7", "1-127");
-        int rows = input.useIntCmdOption("-r", "--rows", "The rows/height of the game","6", "1-127");
-        int playerId = input.useIntCmdOption("-w", "--who", "The playerId of this KI-Client", "1", "1 or 2");
+        int columns = input.useIntCmdOption("-W", "--width", "The columns/length of the game", "7", "1-127");
+        int rows = input.useIntCmdOption("-H", "--height", "The rows/height of the game","6", "1-127");
+        int playerId = input.useIntCmdOption("-n", "--playernumber", "The playerId of this KI-Client", "1", "1 or 2");
         int level = input.useIntCmdOption("-d", "--difficulty", "The difficulty level of this KI-Client", "1", "0=easy, 1=medium, 2=hard");
 
         if(input.ifHelpThenPrintHelp())
