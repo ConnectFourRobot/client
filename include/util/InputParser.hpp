@@ -35,6 +35,7 @@ public:
 
     std::string useStringCmdOption(const char * letter, const char * command, const char * description, const char * defaultValue, const char * limitText);
     int useIntCmdOption(const char * letter, const char * command, const char * description, const char * defaultValue, const char * limitText);
+    bool useBooleanCmdOption(const char * letter, const char * command, const char * description);
 
     bool ifHelpThenPrintHelp(void);
 };

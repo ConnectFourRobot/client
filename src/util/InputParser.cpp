@@ -56,6 +56,15 @@ int InputParser::useIntCmdOption(const char * letter, const char * command, cons
     return std::stoi(result);
 }
 
+bool InputParser::useBooleanCmdOption(const char * letter, const char * command, const char * description) {
+    this->helpLetters.push_back(letter);
+    this->helpCommand.push_back(command);
+    this->helpDescription.push_back(description);
+    this->helpDefaultValues.push_back("-");
+    this->helpLimitTexts.push_back(" ");
+    return (this->cmdOptionExists(std::string(letter)) || this->cmdOptionExists(std::string(command)));
+}
+
 void InputParser::myStrCpy(char ** to, const char * text, int charCount)
 {
     while (*text != '\0' && charCount > 0)
