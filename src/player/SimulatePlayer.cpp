@@ -2,6 +2,7 @@
 #include "../../include/game/PossibleMove.hpp"
 #include "../../include/game/GameSettings.hpp"
 #include "../../include/minmax/Minmax.hpp"
+#include "../../include/logger/Logger.hpp"
 
 #define DEBUG_BEWERTUNGEN 1
 
@@ -19,11 +20,11 @@ int SimulatePlayer::getMove(GameSettings & game)
 
     if (DEBUG_BEWERTUNGEN) {
         for (PossibleMove & move0 : moves) {
-            std::cout << "Bewertung Spalte #" << (move0.getMoveColumn() + 1) << " ist " << move0.getScore() << std::endl;
+            LOG << "Bewertung Spalte #" << (move0.getMoveColumn() + 1) << " ist " << move0.getScore() << std::endl;
         }
     }
 
     //TODO to logger
-    std::cout << "Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
+    LOG << "Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
     return moves[resultMoveIndex].getMoveColumn();
 }

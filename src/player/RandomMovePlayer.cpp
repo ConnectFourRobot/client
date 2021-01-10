@@ -1,6 +1,7 @@
 #include "../../include/player/RandomMovePlayer.hpp"
 #include "../../include/game/PossibleMove.hpp"
 #include "../../include/game/GameSettings.hpp"
+#include "../../include/logger/Logger.hpp"
 
 #include <cstdlib>
 #include <ctime>
@@ -17,6 +18,6 @@ int RandomMovePlayer::getMove(GameSettings & game)
     int resultMoveIndex = rand() % countMoves;
 
     //TODO to logger
-    std::cout << "Found " << countMoves << " Moves. Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
+    LOG << "Found " << countMoves << " Moves. Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
     return moves[resultMoveIndex].getMoveColumn();
 }

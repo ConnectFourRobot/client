@@ -3,6 +3,7 @@
 #include "../include/player/RandomMovePlayer.hpp"
 #include "../include/player/SimulatePlayer.hpp"
 #include "../include/player/NetworkPlayer.hpp"
+#include "../include/logger/Logger.hpp"
 
 //TODO delete these tests
 #include "../include/rating/Rating.hpp"
@@ -10,14 +11,19 @@
 GameHandler::GameHandler(std::string host, unsigned short port, int rows, int columns, int playerId, int level): _game(columns, rows)
 {
     Player * playerKi = 0;
+
+    LOG << "Create GameHandler(host = " << host << ", port = " << port
+    << ", rows = " << rows << ", columns = " << columns
+    << ", playerId = " << playerId << ", level = " << level << ");" << std::endl;
+
     if(DataHandlingService::getInstance().start(host, port) < 0)
     {
         //cannot connect to the server
         // ToDo: Log-Tool
-        std::cout << "Cannot connect to broker" << std::endl;
+        LOG_ERROR << "Cannot connect to broker" << std::endl;
         exit(-1);
     }
-    std::cout << "Init vgr-client" << std::endl;
+    LOG << "Init vgr-client" << std::endl;
 
     switch (level)
     {
@@ -40,10 +46,12 @@ GameHandler::GameHandler(std::string host, unsigned short port, int rows, int co
     case 1:
         this->_game.addPlayer(playerKi);
         this->_game.addPlayer(new NetworkPlayer());
+        LOG << "I am Player 1. " << std::endl;
         break;
     case 2:
         this->_game.addPlayer(new NetworkPlayer());
         this->_game.addPlayer(playerKi);
+        LOG << "I am Player 2. " << std::endl;
         break;
     }
 }
@@ -69,7 +77,7 @@ void GameHandler::run(void)
         case NetworkMessageType::Answer:
         default:
         //TODO move all cout to logger
-            std::cout << "error - invalid Messagetype: " << message.getType() << std::endl;
+            LOG_ERROR << "error - invalid Messagetype: " << message.getType() << std::endl;
             //error
             break;
         }
@@ -78,11 +86,13 @@ void GameHandler::run(void)
 
 inline void GameHandler::runRequest(void)
 {
-    std::cout << "RunRequest()" << std::endl;
-    std::cout.flush();
-    if (this->_game.getCurrentPlayer().getId() != this->_playerNumber + 1) {
+    LOG << "RunRequest()" << std::endl;
+    /*if (this->_game.getCurrentPlayer().getId() != this->_playerNumber + 1) {
+        std::cout << "currentPlayer = " << this->_game.getCurrentPlayer().getId()
+        << ", playerNumber = " << this->_playerNumber << std::endl;
+
         throw "Invalid Move Request. It is not my turn.";
-    }
+    }*/
 
     int gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
     ClientNetworkMessage message;
@@ -94,17 +104,15 @@ inline void GameHandler::runRequest(void)
 
 inline void GameHandler::runMove(int column, int playerId)
 {
-    std::cout << "RunMove(" << column << ", " << playerId << ")" << std::endl;
-    std::cout.flush();
+    LOG << "RunMove(" << column << ", " << playerId << ")" << std::endl;
     //TODO check playerId
     this->_game.putStone(column);
-    std::cout << this->_game.currentMap << std::endl;
+    LOG << this->_game.currentMap << std::endl;
 }
 
 inline void GameHandler::runRegisterClientAtBroker(void)
 {
-    std::cout << "Register to Broker with 42" << std::endl;
-    std::cout.flush();
+    LOG << "Register to Broker with 42" << std::endl;
     ClientNetworkMessage message;
     message.setRegisterMessage();
 
@@ -116,16 +124,16 @@ void GameHandler::runDebug(void)
 {
     int gameMove;
     int winner;
-    std::cout << "Run vgr-client" << std::endl;
-    std::cout << "Compiled from " << __cplusplus << " at " __DATE__ << " - " << __TIME__ << std::endl;
-    std::cout << "Playing on Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
+    LOG << "Run vgr-client" << std::endl;
+    LOG << "Compiled from " << __cplusplus << " at " __DATE__ << " - " << __TIME__ << std::endl;
+    LOG << "Playing on Map[" << this->_game.currentMap.mapArray.size() << "][" << this->_game.currentMap.mapArray[0].size() << "]" << std::endl;
 
     this->_playerNumber = 1;
 
     while(this->_game.currentMap.isMovePossible())
     {
         // print current grid
-        std::cout << this->_game.currentMap;
+        LOG << this->_game.currentMap;
 
         //ask player for move
         gameMove = this->_game.getCurrentPlayer().getMove(this->_game);
@@ -133,25 +141,22 @@ void GameHandler::runDebug(void)
         //validate Move
 
         //get Rating
-        std::cout << "Rating = " << (Rating(this->_game, 1, 0)).rate(this->_game.currentMap) << std::endl;
+        LOG << "Rating = " << (Rating(this->_game, 1, 0)).rate(this->_game.currentMap) << std::endl;
 
         //execute Move
         this->_game.putStone(gameMove);
     }
 
 
-    std::cout << std::endl << "Game ended. ";
+    LOG << std::endl << "Game ended. ";
     winner = this->_game.currentMap.getWinner();
     if (winner < 0)
     {
-        std::cout << "It is a draw. ";
+        LOG << "It is a draw. ";
     }
     else
     {
-        std::cout << "Player #" << winner << " won. ";
+        LOG << "Player #" << winner << " won. ";
     }
-    std::cout << "Final grid: " << std::endl << this->_game.currentMap << std::endl;
-    char cc;
-    std::cout << "Enter zum Beenden: ";
-    std::cin >> cc;
+    LOG << "Final grid: " << std::endl << this->_game.currentMap << std::endl;
 }
