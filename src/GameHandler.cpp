@@ -76,10 +76,8 @@ void GameHandler::run(void)
             return;
         case NetworkMessageType::Answer:
         default:
-        //TODO move all cout to logger
             LOG_ERROR << "error - invalid Messagetype: " << message.getType() << std::endl;
-            //error
-            break;
+            return;
         }
     }
 }
