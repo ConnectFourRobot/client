@@ -70,7 +70,7 @@ void GameHandler::run(void)
         default:
         //TODO move all cout to logger
             std::cout << "error - invalid Messagetype: " << message.getType() << std::endl;
-            //error
+            return;
             break;
         }
     }
