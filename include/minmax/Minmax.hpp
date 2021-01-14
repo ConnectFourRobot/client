@@ -13,6 +13,12 @@ private:
     /** the game containing settings */
     GameSettings & game;
 
+    /** the KI-Player-id */
+    int playerSelfId;
+
+    /** enable pruning for speed up */
+    bool enablePruning;
+
     /** evaluate the moves without going deeper
      * @param std::vector<self> & moves All move candidates for the best move
      * @param int & resultIndex (write-only) The index of the moves vector, which is determined to be the best move
@@ -46,11 +52,9 @@ private:
      * @return bool perform cut-off */
     bool evaluateScore(PossibleMove & mov, int i, int & resultIndex, intMoveScore & resultRating, intMoveScore & pruningMinAlpha, intMoveScore & pruningMaxBeta, bool isMaximizer);
 
-    /** the KI-Player-id */
-    int playerSelfId;
 public:
     /** default constructor */
-    MinMax(GameSettings & game, int playerSelfId);
+    MinMax(GameSettings & game, int playerSelfId, bool enablePruning);
 
     /** search the best move
     * @param std::vector<PossibleMove> & moves A list of all possible Moves

@@ -1,9 +1,7 @@
 #include "../../include/minmax/Minmax.hpp"
 #include "../../include/rating/Rating.hpp"
 
-#define ENABLE_PRUNING true
-
-MinMax::MinMax(GameSettings & game, int playerSelfId): game(game), playerSelfId(playerSelfId)
+MinMax::MinMax(GameSettings & game, int playerSelfId, bool enablePruning): game(game), playerSelfId(playerSelfId), enablePruning(enablePruning)
 {
 }
 
@@ -35,7 +33,7 @@ inline void MinMax::rateMoves(std::vector<PossibleMove> & moves, int & resultInd
         if (this->evaluateScore(mov, i, resultIndex, resultRating, pruningMinAlpha, pruningMaxBeta, isMaximizer))
         {
             // cut off because of pruning
-            if (ENABLE_PRUNING) return;
+            if (this->enablePruning) return;
         }
     }
 }
@@ -63,7 +61,7 @@ void MinMax::getMoveDeeper(std::vector<PossibleMove> & moves, int & resultIndex,
         if (this->evaluateScore(mov, i, resultIndex, resultRating, pruningMinAlpha, pruningMaxBeta, isMaximizer))
         {
             // cut off because of pruning
-            if (ENABLE_PRUNING) return;
+            if (this->enablePruning) return;
         }
     }
 }

@@ -14,10 +14,10 @@ SimulatePlayer::SimulatePlayer(int deep, int randomFactor): Player(), deep(deep)
 
 int SimulatePlayer::getMove(GameSettings & game)
 {
-    MinMax minMax(game, this->id);
+    int maxSecondPenalty = this->randomFactor - rand() % 1000;
+    MinMax minMax(game, this->id, maxSecondPenalty <= 0);
     std::vector<PossibleMove> moves = PossibleMove::calcPossibleMoves(game.currentMap, game, this->getId());
     int resultMoveIndex = 0;
-    int maxSecondPenalty = this->randomFactor - rand() % 1000;
     intMoveScore resultRating = 0;
 
     minMax.getMove(moves, resultMoveIndex, resultRating, -RATING_VICTORY, RATING_VICTORY, this->deep, this->id);
@@ -32,13 +32,15 @@ int SimulatePlayer::getMove(GameSettings & game)
     if (maxSecondPenalty > 0) {
         PossibleMove * secondMove = this->getSecondBestMove(moves, resultRating - maxSecondPenalty);
         if (secondMove != nullptr) {
-            LOG << "Selected the second best move, which is Column #" << (secondMove->getMoveColumn() + 1) << std::endl;
+            LOG << "Selected the second best move, which is Column #" << (secondMove->getMoveColumn() + 1)
+            << "(maxSecondPenalty = " << maxSecondPenalty << ") " << std::endl;
             return secondMove->getMoveColumn();
         }
     }
 
     //TODO to logger
-    LOG << "Selected the Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
+    LOG << "Selected the Column #" << (moves[resultMoveIndex].getMoveColumn() + 1)
+    << "(maxSecondPenalty = " << maxSecondPenalty << ") " << std::endl;
     return moves[resultMoveIndex].getMoveColumn();
 }
 
