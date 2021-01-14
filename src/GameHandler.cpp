@@ -28,16 +28,16 @@ GameHandler::GameHandler(std::string host, unsigned short port, int rows, int co
     switch (level)
     {
     case 0:
-        playerKi = new SimulatePlayer(2);
+        playerKi = new SimulatePlayer(2, 600);
         break;
     case 1:
-        playerKi = new SimulatePlayer(4);
+        playerKi = new SimulatePlayer(4, 300);
         break;
     case 2:
-        playerKi = new SimulatePlayer(6);
+        playerKi = new SimulatePlayer(6, 0);
         break;
     default:
-        playerKi = new SimulatePlayer(1);
+        playerKi = new SimulatePlayer(1, 300);
         break;
     }
 

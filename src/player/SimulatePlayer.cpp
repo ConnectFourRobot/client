@@ -1,12 +1,15 @@
 #include "../../include/player/SimulatePlayer.hpp"
-#include "../../include/game/PossibleMove.hpp"
 #include "../../include/game/GameSettings.hpp"
 #include "../../include/minmax/Minmax.hpp"
 #include "../../include/logger/Logger.hpp"
 
+#include <cstdlib>
+#include <ctime>
+
 #define DEBUG_BEWERTUNGEN 1
 
-SimulatePlayer::SimulatePlayer(int deep): Player(), deep(deep) {
+SimulatePlayer::SimulatePlayer(int deep, int randomFactor): Player(), deep(deep), randomFactor(randomFactor) {
+    srand(time(NULL));
 }
 
 int SimulatePlayer::getMove(GameSettings & game)
@@ -14,6 +17,7 @@ int SimulatePlayer::getMove(GameSettings & game)
     MinMax minMax(game, this->id);
     std::vector<PossibleMove> moves = PossibleMove::calcPossibleMoves(game.currentMap, game, this->getId());
     int resultMoveIndex = 0;
+    int maxSecondPenalty = this->randomFactor - rand() % 1000;
     intMoveScore resultRating = 0;
 
     minMax.getMove(moves, resultMoveIndex, resultRating, -RATING_VICTORY, RATING_VICTORY, this->deep, this->id);
@@ -24,7 +28,39 @@ int SimulatePlayer::getMove(GameSettings & game)
         }
     }
 
+    // sometimes the bot chooses the second best move instead of the best move
+    if (maxSecondPenalty > 0) {
+        PossibleMove * secondMove = this->getSecondBestMove(moves, resultRating - maxSecondPenalty);
+        if (secondMove != nullptr) {
+            LOG << "Selected the second best move, which is Column #" << (secondMove->getMoveColumn() + 1) << std::endl;
+            return secondMove->getMoveColumn();
+        }
+    }
+
     //TODO to logger
-    LOG << "Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
+    LOG << "Selected the Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
     return moves[resultMoveIndex].getMoveColumn();
+}
+
+PossibleMove * SimulatePlayer::getSecondBestMove(std::vector<PossibleMove> & moves, intMoveScore minimumRating)
+{
+    intMoveScore bestRating = minimumRating;
+    intMoveScore secondRating = minimumRating;
+    intMoveScore currentScore;
+    PossibleMove * bestMove = nullptr;
+    PossibleMove * secondMove = nullptr;
+
+    for (PossibleMove & move0 : moves) {
+        currentScore = move0.getScore();
+        if (currentScore > bestRating) {
+            secondRating = bestRating;
+            bestRating = currentScore;
+            secondMove = bestMove;
+            bestMove = &move0;
+        } else if (currentScore > secondRating) {
+            secondRating = currentScore;
+            secondMove = &move0;
+        }
+    }
+    return secondMove;
 }
