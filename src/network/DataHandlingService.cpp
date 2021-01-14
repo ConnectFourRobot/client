@@ -17,10 +17,10 @@ ServerNetworkMessage DataHandlingService::receiveMessage()
 {
     //type
     std::string typeString = this->_networkClient->read(ServerNetworkMessage::typeSize);
-    LOG << "receiveMessage TypeString = " << typeString;
+    LOG << "receiveMessage TypeString = " << static_cast<int>(typeString[0]) << ", ";
     //size
     std::string sizeString = this->_networkClient->read(ServerNetworkMessage::sizeSize);
-    LOG << "SizeString = " << sizeString;
+    LOG << "SizeString = " << static_cast<int>(sizeString[0]) << ", ";
     //TODO: Could be better
     unsigned int size = sizeString.at(0);
 
