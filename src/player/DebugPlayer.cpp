@@ -22,7 +22,7 @@ int DebugPlayer::getMove(GameSettings & game)
     std::cin >> column;
     if (column == 0)
     {
-        std::cout << "Abort selected. Terminate programm" << std::endl;
+        std::cout << "Abort selected. Terminate program." << std::endl;
         exit(0);
     }
     return column - 1;
