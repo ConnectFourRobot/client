@@ -64,6 +64,6 @@ void GameHandler::run()
     }
     std::cout << "Final grid: " << std::endl << this->_game.currentMap << std::endl;
     char cc;
-    std::cout << "Enter zum Beenden: ";
+    std::cout << "Enter for terminating: ";
     std::cin >> cc;
 }
