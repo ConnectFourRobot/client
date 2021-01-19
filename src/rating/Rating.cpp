@@ -6,7 +6,7 @@
 #define minMacro(a, b) (((a) < (b)) ? (a) : (b))
 #define maxMacro(a, b) (((a) > (b)) ? (a) : (b))
 
-Rating::Rating(GameSettings & game, int playerSelfId, int remainingDeep): game(game), playerSelfId(playerSelfId), remainingDeep(remainingDeep)
+Rating::Rating(GameSettings & game, int playerSelfId, int remainingDepth): game(game), playerSelfId(playerSelfId), remainingDepth(remainingDepth)
 {
 }
 
@@ -90,9 +90,9 @@ intMoveScore Rating::rateFinished(const Grid & grid)
         return 0;
     } else if (winner == this->playerSelfId) {
         //player 1 won
-        return RATING_VICTORY + this->remainingDeep;
+        return RATING_VICTORY + this->remainingDepth;
     } else {
         //player 2 won
-        return -RATING_VICTORY - this->remainingDeep;
+        return -RATING_VICTORY - this->remainingDepth;
     }
 }

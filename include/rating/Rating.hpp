@@ -23,10 +23,10 @@ private:
     int playerSelfId;
 
     /** for terminated games: how many steps are skipped due to termination of game */
-    int remainingDeep;
+    int remainingDepth;
 public:
     /** constructor */
-    Rating(GameSettings & game, int playerSelfId, int remainingDeep);
+    Rating(GameSettings & game, int playerSelfId, int remainingDepth);
 
     /** evaluate the grid */
     intMoveScore rate(const Grid & grid);
