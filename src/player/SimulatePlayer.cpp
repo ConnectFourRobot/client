@@ -20,7 +20,7 @@ int SimulatePlayer::getMove(GameSettings & game)
     int resultMoveIndex = 0;
     intMoveScore resultRating = 0;
 
-    minMax.getMove(moves, resultMoveIndex, resultRating, -RATING_VICTORY, RATING_VICTORY, this->deep, this->id);
+    minMax.getMove(moves, resultMoveIndex, resultRating, -RATING_VICTORY, RATING_VICTORY, this->depth, this->id);
 
     if (DEBUG_BEWERTUNGEN) {
         for (PossibleMove & move0 : moves) {

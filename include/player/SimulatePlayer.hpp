@@ -9,7 +9,7 @@ class SimulatePlayer : public Player
 {
 protected:
     /** how deep the bot should search for the best move */
-    int deep;
+    int depth;
 
     /** random factor also allows less good moves. It is the maximum score difference between the best move and the second best move.
      * randomFactor = 0: always choose best move */
@@ -20,13 +20,13 @@ protected:
 
 public:
     /** constructor */
-    SimulatePlayer(int deep = 2, int randomFactor = 3);
+    SimulatePlayer(int depth = 2, int randomFactor = 3);
 
     /** @inheritdoc */
      virtual int getMove(GameSettings & game);
 
      /** default setter */
-     inline void setDeep(int deep) {this->deep = deep;}
+     inline void setDepth(int depth) {this->depth = depth;}
 };
 
 #endif //PLAYER_SIMULATEPLAYER_HPP
