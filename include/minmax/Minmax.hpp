@@ -30,10 +30,11 @@ private:
      * @param intMoveScore & resultRating (write-only) The rating of the best move
      * @param intMoveScore pruningMinAlpha the alpha value of Alpha-Beta-Pruning-Algorithm
      * @param intMoveScore pruningMaxBeta the beta value of Alpha-Beta-Pruning-Algorithm
+     * @param int depth remaining deepness
      * @param int playerTurnId The player's id who made the moves given in vector moves
      * @param bool isMaximizer true: best move is the one with highest rating. false: best move is the one with least rating.
      */
-    void getMoveDeeper(std::vector<PossibleMove> & moves, int & resultIndex, intMoveScore & resultRating, intMoveScore pruningMinAlpha, intMoveScore pruningMaxBeta, int deep, int playerTurnId, bool isMaximizer);
+    void getMoveDeeper(std::vector<PossibleMove> & moves, int & resultIndex, intMoveScore & resultRating, intMoveScore pruningMinAlpha, intMoveScore pruningMaxBeta, int depth, int playerTurnId, bool isMaximizer);
 
     /** evaluate the score of a move and decide if cut-off-able
      * @param PossibleMove & mov The move which should be evaluated
@@ -58,11 +59,11 @@ public:
     * @param intMoveScore & resultRating The rating of the best move
     * @param intMoveScore pruningMinAlpha Pruning value Alpha, should be initialized with -RATING_VICTORY
     * @param intMoveScore pruningMaxBeta Pruning value Beta, should be initialized with +RATING_VICTORY
-    * @param int deep search deepness: 0=only evaluate these given moves, 1=only evaluate these moves and the responses, ...
+    * @param int depth search deepness: 0=only evaluate these given moves, 1=only evaluate these moves and the responses, ...
     * @param int playerTurnId The player who has made the moves in the vector moves
     * @param int playerSelfId The KI player
     */
-    void getMove(std::vector<PossibleMove> & moves, int & resultIndex, intMoveScore & resultRating, intMoveScore pruningMinAlpha, intMoveScore pruningMaxBeta, int deep, int playerTurnId);
+    void getMove(std::vector<PossibleMove> & moves, int & resultIndex, intMoveScore & resultRating, intMoveScore pruningMinAlpha, intMoveScore pruningMaxBeta, int depth, int playerTurnId);
 };
 
 #endif // MINMAX_HPP
