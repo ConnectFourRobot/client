@@ -4,8 +4,7 @@
 #include "../../include/minmax/Minmax.hpp"
 
 #define DEBUG_BEWERTUNGEN 1
-
-SimulatePlayer::SimulatePlayer(int deep): Player(), deep(deep) {
+SimulatePlayer::SimulatePlayer(int depth): Player(), depth(depth) {
 }
 
 int SimulatePlayer::getMove(GameSettings & game)
