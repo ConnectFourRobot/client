@@ -8,7 +8,7 @@
 
 #define DEBUG_BEWERTUNGEN 1
 
-SimulatePlayer::SimulatePlayer(int deep, int randomFactor): Player(), deep(deep), randomFactor(randomFactor) {
+SimulatePlayer::SimulatePlayer(int depth, int randomFactor): Player(), depth(depth), randomFactor(randomFactor) {
     srand(time(NULL));
 }
 
