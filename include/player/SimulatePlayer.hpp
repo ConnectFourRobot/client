@@ -8,17 +8,17 @@ class SimulatePlayer : public Player
 {
 protected:
     /** how deep the bot should search for the best move */
-    int deep;
+    int depth;
 
 public:
     /** constructor */
-    SimulatePlayer(int deep = 2);
+    SimulatePlayer(int depth = 2);
 
     /** @inheritdoc */
      virtual int getMove(GameSettings & game);
 
      /** default setter */
-     inline void setDeep(int deep) {this->deep = deep;}
+     inline void setDepth(int depth) {this->depth = depth;}
 };
 
 #endif //PLAYER_SIMULATEPLAYER_HPP
