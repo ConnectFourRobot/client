@@ -3,7 +3,7 @@
 #include "../../include/game/GameSettings.hpp"
 #include "../../include/minmax/Minmax.hpp"
 
-SimulatePlayer::SimulatePlayer(int deep): Player(), deep(deep) {
+SimulatePlayer::SimulatePlayer(int depth): Player(), depth(depth) {
 }
 
 int SimulatePlayer::getMove(GameSettings & game)
@@ -13,7 +13,7 @@ int SimulatePlayer::getMove(GameSettings & game)
     int resultMoveIndex = 0;
     intMoveScore resultRating = 0;
 
-    minMax.getMove(moves, resultMoveIndex, resultRating, -RATING_VICTORY, RATING_VICTORY, this->deep, this->id);
+    minMax.getMove(moves, resultMoveIndex, resultRating, -RATING_VICTORY, RATING_VICTORY, this->depth, this->id);
 
     //TODO to logger
     std::cout << "Selected the " << (resultMoveIndex + 1) << "th, which is Column #" << (moves[resultMoveIndex].getMoveColumn() + 1) << std::endl;
