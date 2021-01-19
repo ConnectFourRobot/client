@@ -3,7 +3,7 @@
 #include "../../include/game/GameSettings.hpp"
 #include "../../include/minmax/Minmax.hpp"
 
-SimulatePlayer::SimulatePlayer(int deep): Player(), deep(deep) {
+SimulatePlayer::SimulatePlayer(int depth): Player(), depth(depth) {
 }
 
 int SimulatePlayer::getMove(GameSettings & game)
