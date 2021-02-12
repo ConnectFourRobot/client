@@ -5,4 +5,9 @@ build
 bin
 
 # Ignore VSCode files
-.vscode
+/.vscode
+/.idea/*
+/.vs/*
+/Debug/*
+/vierGewinntVS.*
+/logs/*

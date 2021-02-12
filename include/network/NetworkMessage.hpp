@@ -10,74 +10,75 @@
 
 using namespace std;
 
-class NetworkMessage{
-    protected:
-        NetworkMessageType _type;
-        uint8_t _size;
-        std::string _message;
-    public:
-        const static short typeSize = 1;
-        const static short sizeSize = 1;
+class NetworkMessage
+{
+protected:
+    NetworkMessageType _type;
+    uint8_t _size;
+    std::string _message;
 
-        /**
-         * Get the size of the payload
-         *
-         * @return size of the payload
-        */
-        unsigned int getPayloadSize();
+protected:
+    /** NetworkMessage is abstract, so no public constructors */
+    NetworkMessage(): _type(NetworkMessageType::Unknown), _size(0), _message("") {}
 
-        /**
-         * Get the whole network message
-         * Including the type and the size
-         *
-         * @return network message
-        */
-        std::string getNetworkMessage();
+public:
+    const static short typeSize = 1;
+    const static short sizeSize = 1;
 
-        /**
-         * Get the payload
-         *
-         * @return payload
-        */
-        std::string getMessage();
+    /**
+     * Get the size of the payload
+     *
+     * @return size of the payload
+    */
+    unsigned int getPayloadSize();
 
-        /**
-         * Get length/size of the whole network message
-         *
-         * @return length
-        */
-        unsigned int getLength();
+    /**
+     * Get the whole network message
+     * Including the type and the size
+     *
+     * @return network message
+    */
+    std::string getNetworkMessage();
 
-        NetworkMessageType getMessageType();
-        ~NetworkMessage();
+    /**
+     * Get the payload
+     *
+     * @return payload
+    */
+    std::string getMessage();
+
+    /**
+     * Get length/size of the whole network message
+     *
+     * @return length
+    */
+    unsigned int getLength();
+
+    NetworkMessageType getMessageType();
+    ~NetworkMessage();
 };
 
-class ClientNetworkMessage : public NetworkMessage{
-    public:
-        ClientNetworkMessage(int8_t column);
+class ClientNetworkMessage : public NetworkMessage
+{
+public:
+    ClientNetworkMessage(): NetworkMessage() {};
+
+    ClientNetworkMessage & setAnswerColumn(int8_t column);
+    ClientNetworkMessage & setRegisterMessage();
 };
 
-class ServerNetworkMessage : public NetworkMessage{
+class ServerNetworkMessage : public NetworkMessage
+{
     // We do not know, which servermessage is coming
     // so this is a temporary solution, but it is not in a good oop way
-    private:
-        struct GameConfigStruct
-        {
-            int8_t playerNumber;
-        };
-        struct MoveStruct
-        {
-            int8_t x;
-            int8_t playerNumber;
-        };
-        struct EndGameStruct
-        {
-            int8_t playerNumber;
-        };
-    public:
-        MoveStruct move;
-        GameConfigStruct gameConfig;
-        EndGameStruct endGame;
-        ServerNetworkMessage(NetworkMessageType type, unsigned int size, std::string serverMessage);
+protected:
+    int8_t _playerId, _column;
+
+public:
+    ServerNetworkMessage(NetworkMessageType type, unsigned int size, std::string serverMessage);
+    inline NetworkMessageType getType() const {return this->_type;}
+    inline int8_t getPlayerId() const {return this->_playerId;}
+    inline int8_t getColumn() const {return this->_column;}
 };
+
 #endif

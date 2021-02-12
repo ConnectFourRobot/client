@@ -1,10 +1,12 @@
 #include "../../include/network/NetworkClient.hpp"
+#include "../../include/logger/Logger.hpp"
 
-int NetworkClient::connect(){
+int NetworkClient::connect()
+{
     if ((_sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         // ToDo: Log-Tool
-        std::cout << "Socket creation error" << std::endl;
+        LOG_ERROR << "Socket creation error" << std::endl;
         exit(0);
     }
 
@@ -17,7 +19,7 @@ int NetworkClient::connect(){
     if(inet_pton(AF_INET, _address.c_str(), &_server.sin_addr)<=0)
     {
         // ToDo: Log-Tool
-        std::cout << "Invalid address" << std::endl;
+        LOG_ERROR << "Invalid address" << std::endl;
         exit(0);
     }
 
@@ -25,34 +27,41 @@ int NetworkClient::connect(){
     if (::connect(_sock, (struct sockaddr *)&_server, sizeof(_server)) < 0)
     {
         // ToDo: Log-Tool
-        std::cout << "Connection failed" << std::endl;
+        LOG_ERROR << "Connection failed" << std::endl;
         return -1;
     }
 
     return 0;
 }
 
-std::string NetworkClient::read(int size){
+std::string NetworkClient::read(int size)
+{
     //Receive a reply from the server
     char mp[size];
-	if(::recv(_sock, mp, size , 0) < 0)
-	{
+    if (size == 0) {
+        return std::string(mp, 0);
+    }
+    if(::recv(_sock, mp, size, 0) < 0)
+    {
         // recv failed
         // ToDo: Log-Tool
         return "";
-	}
+    }
     std::string s = std::string(mp, size);
     // ToDo: Log the string via Log-Tool
     return s;
 }
 
-void NetworkClient::send(std::string message){
-    if(_sock){
+void NetworkClient::send(std::string message)
+{
+    if(_sock)
+    {
         ::send(_sock, message.c_str(), message.length(), 0);
         // ToDo: Log the message via Log-Tool
     }
 }
 
-NetworkClient::~NetworkClient(){
+NetworkClient::~NetworkClient()
+{
     _sock = 0;
 }
