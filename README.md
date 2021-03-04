@@ -1,2 +1,2 @@
-# Vier-Gewinnt-Roboter (Client)
-Der Client ist für die Zugberechnung verantwortlich und sendet den Zug an den Broker.
+# ConnectFourRobot (Client)
+This service calculates the best move for the robot and sends it to the broker.
